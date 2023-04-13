@@ -9,6 +9,7 @@ LOGGER = get_logger()
 # 株価四本値(/prices/daily_quotes)
 # https://jpx.gitbook.io/j-quants-ja/api-reference/daily_quotes
 
+
 class DailyQuotes(IncrementalTableStream):
     """the daily_quotes stream"""
 
@@ -18,7 +19,7 @@ class DailyQuotes(IncrementalTableStream):
         "date",
         "code",
     ]
-    valid_replication_keys = ("date",)
+    valid_replication_keys = ["date"]
     date_window_size = 1
 
     data_key = "daily_quotes"

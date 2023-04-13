@@ -1,17 +1,8 @@
-import json
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
-from typing import Dict, List, Tuple, Union
+from typing import Dict, List, Optional, Tuple
 
-from singer import (
-    Transformer,
-    metadata,
-    metrics,
-    should_sync_field,
-    utils,
-    write_record,
-    write_state,
-)
+from singer import Transformer, metrics, utils, write_record, write_state
 from singer.logger import get_logger
 from singer.metadata import get_standard_metadata
 
@@ -30,24 +21,17 @@ class BaseStream(ABC):
 
     @property
     @abstractmethod
-    def forced_replication_method(self) -> str:
-        """Defines the sync mode of a stream."""
+    def replication_key(self) -> Optional[str]:
+        """Defines the replication key for incremental sync mode of a stream."""
 
     @property
     @abstractmethod
-    def replication_key(self) -> str:
-        """Defines the replication key for incremental sync mode of a
-        stream."""
+    def valid_replication_keys(self) -> Optional[List[str]]:
+        """Defines the replication key for incremental sync mode of a stream."""
 
     @property
     @abstractmethod
-    def valid_replication_keys(self) -> Tuple[str, str]:
-        """Defines the replication key for incremental sync mode of a
-        stream."""
-
-    @property
-    @abstractmethod
-    def key_properties(self) -> Tuple[str, str]:
+    def key_properties(self) -> List[str]:
         """List of key properties for stream."""
 
     @property
@@ -80,25 +64,22 @@ class BaseStream(ABC):
     @classmethod
     def get_metadata(cls, schema) -> Dict[str, str]:
         """Returns a `dict` for generating stream metadata."""
-        return get_standard_metadata(**{
-            "schema": schema,
-            "key_properties": cls.key_properties,
-            "valid_replication_keys": cls.valid_replication_keys,
-            "replication_method": cls.replication_method or cls.forced_replication_method,
-        })
+        return get_standard_metadata(
+            **{
+                "schema": schema,
+                "key_properties": cls.key_properties,
+                "valid_replication_keys": cls.valid_replication_keys,
+                "replication_method": cls.replication_method,
+            }
+        )
 
 
 class IncrementalTableStream(BaseStream, ABC):
     """Base Class for Incremental Stream."""
 
     replication_method = "INCREMENTAL"
-    forced_replication_method = "INCREMENTAL"
     replication_key = "date"
-    # row_limit = 100
-    # path = "sites/{}/searchAnalytics/query"
     now_dt_tm = utils.now()
-    # dimension_list = []
-    # body_params = {}
 
     # declaring this variable to keep track of number of
     # records processed per stream, per site, per sub_type
@@ -111,16 +92,10 @@ class IncrementalTableStream(BaseStream, ABC):
             return default
         return state.get("bookmarks", {}).get(stream, default)
 
-    # @property
-    # def get_attribution_days(self) -> Union[str, int]:
-    #     """Sets this value to 4days since there is data delay of 2-3 days from GSC"""
-    #     return int(self.config.get("ATTRIBUTION_DAYS") or 4)
-
     @property
     def date_window_size(self) -> int:
         """The number of days to request data.
         The default is 0, and it is assumed to be not specified."""
-        # return int(self.config.get("DATE_WINDOW_SIZE") or 30)
         return 1
 
     def write_bookmark(self, state: Dict, value: str) -> None:
@@ -159,18 +134,6 @@ class IncrementalTableStream(BaseStream, ABC):
             end_dt_tm = self.now_dt_tm
         return start_dt_tm, end_dt_tm
 
-    # def set_dimensions_in_payload(self, stream_metadata: Dict) -> List:
-    #     """Set only the selected (field selection) dimensions in API
-    #     payload."""
-    #     selected_dimensions = []
-    #     for dimension in self.dimension_list:
-    #         if should_sync_field(
-    #             metadata.get(stream_metadata, ("properties", dimension), "inclusion"),
-    #             metadata.get(stream_metadata, ("properties", dimension), "selected"),
-    #         ):
-    #             selected_dimensions.append(dimension)
-    #     return selected_dimensions
-
     def make_payload(self, start_date: str, end_date: str, stream_metadata: Dict) -> Dict:
         """Creates payload for POST API Call.
         The default implementation returns an empty."""
@@ -208,7 +171,7 @@ class IncrementalTableStream(BaseStream, ABC):
                     transformed_record = transformer.transform(record, schema, stream_metadata)
 
                     # Reset max_bookmark_value to new value if higher
-                    if self.replication_key in transformed_record:  # replication_keyが日付ではないケースは実際には考慮していないよね。
+                    if self.replication_key in transformed_record:  # replication_keyが日付ではないケースは実際には考慮していない
                         bookmark_date = transformed_record.get(self.replication_key)
                         bookmark_dt_tm = utils.strptime_to_utc(bookmark_date)  # 今回の値
                         last_dt_tm = utils.strptime_to_utc(last_datetime)  # 前回の値
@@ -238,14 +201,11 @@ class IncrementalTableStream(BaseStream, ABC):
         start_dt_tm, end_dt_tm = self.get_start_and_end_times(state, self.tap_stream_id)
         LOGGER.info(f"bookmark value or start date for {self.tap_stream_id}: {start_dt_tm}")
         while start_dt_tm < end_dt_tm:
-            # offset, row_limit, batch_count = 0, self.row_limit, self.row_limit
             last_datetime = self.get_bookmark(state, self.tap_stream_id, self.config.get("start_date"))
             bookmark_value = last_datetime
             start_str, end_str = utils.strftime(start_dt_tm)[:10], utils.strftime(end_dt_tm)[:10]
 
-            LOGGER.info(
-                f"Running sync for {self.tap_stream_id} between date window {start_str} {end_str}"
-            )
+            LOGGER.info(f"Running sync for {self.tap_stream_id} between date window {start_str} {end_str}")
             payload = self.make_payload(start_str, end_str, stream_metadata)
             params = self.make_params(start_str, end_str, stream_metadata)
             time_extracted = utils.now()
@@ -285,9 +245,7 @@ class IncrementalTableStream(BaseStream, ABC):
         LOGGER.info(f"Starting Sync for Stream {self.tap_stream_id}")
         self.records_extracted = 0
         self.get_records(state, schema, stream_metadata)
-        LOGGER.info(
-            f"Total records extracted for Stream: {self.tap_stream_id}: {self.records_extracted}"
-        )
+        LOGGER.info(f"Total records extracted for Stream: {self.tap_stream_id}: {self.records_extracted}")
         LOGGER.info(f"Finished Sync for Stream {self.tap_stream_id}")
 
 
@@ -295,7 +253,6 @@ class FullTableStream(BaseStream, ABC):
     """Base Class for full table Stream."""
 
     replication_method = "FULL_TABLE"
-    forced_replication_method = "FULL_TABLE"
     api_method = "GET"
     valid_replication_keys = None
     replication_key = None

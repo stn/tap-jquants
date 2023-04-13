@@ -1,0 +1,14 @@
+[tool.black]
+line-length = 120
+target-version = ['py39',]
+include = '\.pyi?$'
+
+[flake8]
+profile = "black"
+max-line-length = 120
+exclude = ".git,.tox,.venv,build,dist,./tests/.env,tests"
+max-complexity = 18
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3

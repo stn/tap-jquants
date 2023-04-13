@@ -9,6 +9,7 @@ LOGGER = get_logger()
 # 投資部門別情報(/markets/trades_spec)
 # https://jpx.gitbook.io/j-quants-ja/api-reference/trades_spec
 
+
 class TradesSpec(IncrementalTableStream):
     """the trades_spec stream"""
 
@@ -18,7 +19,7 @@ class TradesSpec(IncrementalTableStream):
         "published_date",
         "section",
     ]
-    valid_replication_keys = ("published_date",)
+    valid_replication_keys = ["published_date"]
     date_window_size = 1
 
     data_key = "trades_spec"

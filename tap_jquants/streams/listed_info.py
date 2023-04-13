@@ -1,18 +1,15 @@
 from typing import Dict, Iterator
-from urllib.parse import urlencode
 
 from singer.logger import get_logger
 
-from .abstract import FullTableStream
 from ..helpers import convert_json
+from .abstract import FullTableStream
 
 LOGGER = get_logger()
 
 # 上場銘柄一覧(/listed/info)
 # https://jpx.gitbook.io/j-quants-ja/api-reference/listed_info
-#
-# 翌日の情報も得られる珍しいendpoint
-# しかし、dateは指定しないで取得するのが普通の使い方じゃないかな
+
 
 class ListedInfo(FullTableStream):
     """the listed info stream"""

@@ -3,7 +3,6 @@ from typing import Dict, Tuple
 
 from singer.catalog import Catalog
 
-from . import JquantsClient
 from .helpers import get_abs_path
 from .streams import STREAMS
 

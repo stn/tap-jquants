@@ -1,12 +1,8 @@
-from typing import Dict, List
-import hashlib
-import json
 import os
 import re
-from urllib.parse import quote
+from typing import Dict, List
 
 import singer
-
 
 LOGGER = singer.get_logger()
 
@@ -41,7 +37,7 @@ def convert_array(arr: List):
 # Convert keys in json
 def convert_json(data_object: Dict):
     """Converts all the CamelCased Keys in a nested dictionary object to snake
-        case."""
+    case."""
     out = {}
     for key in data_object:
         new_key = convert(key)

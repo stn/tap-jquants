@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
-import os
-import json
+
 import singer
 from singer import utils
-from singer.schema import Schema
 
 from .client import JquantsClient
 from .discover import discover
 from .sync import sync
-
 
 REQUIRED_CONFIG_KEYS = ["mail_address", "password"]
 LOGGER = singer.get_logger()

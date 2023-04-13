@@ -1,13 +1,12 @@
+import urllib.parse
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict
-import urllib.parse
 
 import requests
 import singer
 from singer import metrics, utils
 
 from .exceptions import raise_for_error
-
 
 BASE_URL = "https://api.jquants.com/v1"
 LOGGER = singer.get_logger()
@@ -17,11 +16,12 @@ REQUEST_TIMEOUT = 300
 
 
 class JquantsClient:
-    def __init__(self,
-                 mail_address=None,
-                 password=None,
-                 timeout=REQUEST_TIMEOUT,
-                 ):
+    def __init__(
+        self,
+        mail_address=None,
+        password=None,
+        timeout=REQUEST_TIMEOUT,
+    ):
         self._mail_address = mail_address
         self._password = password
         self._refresh_token = None

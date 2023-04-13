@@ -1,4 +1,3 @@
-
 from typing import Dict
 
 import singer
@@ -6,7 +5,6 @@ from singer import Catalog, metadata
 
 from .client import JquantsClient
 from .streams import STREAMS
-
 
 LOGGER = singer.get_logger()
 
