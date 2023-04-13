@@ -1,0 +1,177 @@
+{
+  "type": "object",
+  "properties": {
+    "published_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "section": {
+      "type": "string"
+    },
+    "proprietary_sales": {
+      "type": "number"
+    },
+    "proprietary_purchases": {
+      "type": "number"
+    },
+    "proprietary_total": {
+      "type": "number"
+    },
+    "proprietary_balance": {
+      "type": "number"
+    },
+    "brokerage_sales": {
+      "type": "number"
+    },
+    "brokerage_purchases": {
+      "type": "number"
+    },
+    "brokerage_total": {
+      "type": "number"
+    },
+    "brokerage_balance": {
+      "type": "number"
+    },
+    "total_sales": {
+      "type": "number"
+    },
+    "total_purchases": {
+      "type": "number"
+    },
+    "total_total": {
+      "type": "number"
+    },
+    "total_balance": {
+      "type": "number"
+    },
+    "individuals_sales": {
+      "type": "number"
+    },
+    "individuals_purchases": {
+      "type": "number"
+    },
+    "individuals_total": {
+      "type": "number"
+    },
+    "individuals_balance": {
+      "type": "number"
+    },
+    "foreigners_sales": {
+      "type": "number"
+    },
+    "foreigners_purchases": {
+      "type": "number"
+    },
+    "foreigners_total": {
+      "type": "number"
+    },
+    "foreigners_balance": {
+      "type": "number"
+    },
+    "securities_cos_sales": {
+      "type": "number"
+    },
+    "securities_cos_purchases": {
+      "type": "number"
+    },
+    "securities_cos_total": {
+      "type": "number"
+    },
+    "securities_cos_balance": {
+      "type": "number"
+    },
+    "investment_trusts_sales": {
+      "type": "number"
+    },
+    "investment_trusts_purchases": {
+      "type": "number"
+    },
+    "investment_trusts_total": {
+      "type": "number"
+    },
+    "investment_trusts_balance": {
+      "type": "number"
+    },
+    "business_cos_sales": {
+      "type": "number"
+    },
+    "business_cos_purchases": {
+      "type": "number"
+    },
+    "business_cos_total": {
+      "type": "number"
+    },
+    "business_cos_balance": {
+      "type": "number"
+    },
+    "other_cos_sales": {
+      "type": "number"
+    },
+    "other_cos_purchases": {
+      "type": "number"
+    },
+    "other_cos_total": {
+      "type": "number"
+    },
+    "other_cos_balance": {
+      "type": "number"
+    },
+    "insurance_cos_sales": {
+      "type": "number"
+    },
+    "insurance_cos_purchases": {
+      "type": "number"
+    },
+    "insurance_cos_total": {
+      "type": "number"
+    },
+    "insurance_cos_balance": {
+      "type": "number"
+    },
+    "city_bks_regional_bks_etc_sales": {
+      "type": "number"
+    },
+    "city_bks_regional_bks_etc_purchases": {
+      "type": "number"
+    },
+    "city_bks_regional_bks_etc_total": {
+      "type": "number"
+    },
+    "city_bks_regional_bks_etc_balance": {
+      "type": "number"
+    },
+    "trust_banks_sales": {
+      "type": "number"
+    },
+    "trust_banks_purchases": {
+      "type": "number"
+    },
+    "trust_banks_total": {
+      "type": "number"
+    },
+    "trust_banks_balance": {
+      "type": "number"
+    },
+    "other_financial_institutions_sales": {
+      "type": "number"
+    },
+    "other_financial_institutions_purchases": {
+      "type": "number"
+    },
+    "other_financial_institutions_total": {
+      "type": "number"
+    },
+    "other_financial_institutions_balance": {
+      "type": "number"
+    }
+  },
+  "additionalProperties": false
+}

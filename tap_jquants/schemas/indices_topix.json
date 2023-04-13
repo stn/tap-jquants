@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "open": {
+      "type": "number"
+    },
+    "high": {
+      "type": "number"
+    },
+    "low": {
+      "type": "number"
+    },
+    "close": {
+      "type": "number"
+    }
+  },
+  "additionalProperties": false
+}

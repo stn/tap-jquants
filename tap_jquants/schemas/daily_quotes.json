@@ -1,0 +1,115 @@
+{
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "code": {
+      "type": "string"
+    },
+    "open": {
+      "type": ["null", "number"]
+    },
+    "high": {
+      "type": ["null", "number"]
+    },
+    "low": {
+      "type": ["null", "number"]
+    },
+    "close": {
+      "type": ["null", "number"]
+    },
+    "volume": {
+      "type": ["null", "number"]
+    },
+    "turnover_value": {
+      "type": ["null", "number"]
+    },
+    "adjustment_factor": {
+      "type": ["null", "number"]
+    },
+    "adjustment_open": {
+      "type": ["null", "number"]
+    },
+    "adjustment_high": {
+      "type": ["null", "number"]
+    },
+    "adjustment_low": {
+      "type": ["null", "number"]
+    },
+    "adjustment_close": {
+      "type": ["null", "number"]
+    },
+    "adjustment_volume": {
+      "type": ["null", "number"]
+    },
+    "morning_open": {
+      "type": ["null", "number"]
+    },
+    "morning_high": {
+      "type": ["null", "number"]
+    },
+    "morning_low": {
+      "type": ["null", "number"]
+    },
+    "morning_close": {
+      "type": ["null", "number"]
+    },
+    "morning_volume": {
+      "type": ["null", "number"]
+    },
+    "morning_turnover_value": {
+      "type": ["null", "number"]
+    },
+    "morning_adjustment_open": {
+      "type": ["null", "number"]
+    },
+    "morning_adjustment_high": {
+      "type": ["null", "number"]
+    },
+    "morning_adjustment_low": {
+      "type": ["null", "number"]
+    },
+    "morning_adjustment_close": {
+      "type": ["null", "number"]
+    },
+    "morning_adjustment_volume": {
+      "type": ["null", "number"]
+    },
+    "after_open": {
+      "type": ["null", "number"]
+    },
+    "after_high": {
+      "type": ["null", "number"]
+    },
+    "after_low": {
+      "type": ["null", "number"]
+    },
+    "after_close": {
+      "type": ["null", "number"]
+    },
+    "after_volume": {
+      "type": ["null", "number"]
+    },
+    "after_turnover_value": {
+      "type": ["null", "number"]
+    },
+    "after_adjustment_open": {
+      "type": ["null", "number"]
+    },
+    "after_adjustment_high": {
+      "type": ["null", "number"]
+    },
+    "after_adjustment_low": {
+      "type": ["null", "number"]
+    },
+    "after_adjustment_close": {
+      "type": ["null", "number"]
+    },
+    "after_adjustment_volume": {
+      "type": ["null", "number"]
+    }
+  },
+  "additionalProperties": false
+}
