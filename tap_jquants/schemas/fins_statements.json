@@ -1,0 +1,328 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "disclosed_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "local_code": {
+      "type": "string"
+    },
+    "disclosure_number": {
+      "type": "string"
+    },
+    "type_of_document": {
+      "type": "string"
+    },
+    "type_of_current_period": {
+      "type": "string"
+    },
+    "current_period_start_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "current_period_end_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "current_fiscal_year_start_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "current_fiscal_year_end_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "next_fiscal_year_start_date": {
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "next_fiscal_year_end_date": {
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "net_sales": {
+      "type": "string"
+    },
+    "operating_profit": {
+      "type": "string"
+    },
+    "ordinary_profit": {
+      "type": "string"
+    },
+    "profit": {
+      "type": "string"
+    },
+    "earnings_per_share": {
+      "type": "string"
+    },
+    "diluted_earnings_per_share": {
+      "type": "string"
+    },
+    "total_assets": {
+      "type": "string"
+    },
+    "equity": {
+      "type": "string"
+    },
+    "equity_to_asset_ratio": {
+      "type": "string"
+    },
+    "book_value_per_share": {
+      "type": "string"
+    },
+    "cash_flows_from_operating_activities": {
+      "type": "string"
+    },
+    "cash_flows_from_investing_activities": {
+      "type": "string"
+    },
+    "cash_flows_from_financing_activities": {
+      "type": "string"
+    },
+    "cash_and_equivalents": {
+      "type": "string"
+    },
+    "result_dividend_per_share1st_quarter": {
+      "type": "string"
+    },
+    "result_dividend_per_share2nd_quarter": {
+      "type": "string"
+    },
+    "result_dividend_per_share3rd_quarter": {
+      "type": "string"
+    },
+    "result_dividend_per_share_fiscal_year_end": {
+      "type": "string"
+    },
+    "result_dividend_per_share_annual": {
+      "type": "string"
+    },
+    "distributions_per_unit_reit": {
+      "type": "string"
+    },
+    "result_total_dividend_paid_annual": {
+      "type": "string"
+    },
+    "result_payout_ratio_annual": {
+      "type": "string"
+    },
+    "forecast_dividend_per_share1st_quarter": {
+      "type": "string"
+    },
+    "forecast_dividend_per_share2nd_quarter": {
+      "type": "string"
+    },
+    "forecast_dividend_per_share3rd_quarter": {
+      "type": "string"
+    },
+    "forecast_dividend_per_share_fiscal_year_end": {
+      "type": "string"
+    },
+    "forecast_dividend_per_share_annual": {
+      "type": "string"
+    },
+    "forecast_distributions_per_unit_reit": {
+      "type": "string"
+    },
+    "forecast_total_dividend_paid_annual": {
+      "type": "string"
+    },
+    "forecast_payout_ratio_annual": {
+      "type": "string"
+    },
+    "next_year_forecast_dividend_per_share1st_quarter": {
+      "type": "string"
+    },
+    "next_year_forecast_dividend_per_share2nd_quarter": {
+      "type": "string"
+    },
+    "next_year_forecast_dividend_per_share3rd_quarter": {
+      "type": "string"
+    },
+    "next_year_forecast_dividend_per_share_fiscal_year_end": {
+      "type": "string"
+    },
+    "next_year_forecast_dividend_per_share_annual": {
+      "type": "string"
+    },
+    "next_year_forecast_distributions_per_unit_reit": {
+      "type": "string"
+    },
+    "next_year_forecast_payout_ratio_annual": {
+      "type": "string"
+    },
+    "forecast_net_sales2nd_quarter": {
+      "type": "string"
+    },
+    "forecast_operating_profit2nd_quarter": {
+      "type": "string"
+    },
+    "forecast_ordinary_profit2nd_quarter": {
+      "type": "string"
+    },
+    "forecast_profit2nd_quarter": {
+      "type": "string"
+    },
+    "forecast_earnings_per_share2nd_quarter": {
+      "type": "string"
+    },
+    "next_year_forecast_net_sales2nd_quarter": {
+      "type": "string"
+    },
+    "next_year_forecast_operating_profit2nd_quarter": {
+      "type": "string"
+    },
+    "next_year_forecast_ordinary_profit2nd_quarter": {
+      "type": "string"
+    },
+    "next_year_forecast_profit2nd_quarter": {
+      "type": "string"
+    },
+    "next_year_forecast_earnings_per_share2nd_quarter": {
+      "type": "string"
+    },
+    "forecast_net_sales": {
+      "type": "string"
+    },
+    "forecast_operating_profit": {
+      "type": "string"
+    },
+    "forecast_ordinary_profit": {
+      "type": "string"
+    },
+    "forecast_profit": {
+      "type": "string"
+    },
+    "forecast_earnings_per_share": {
+      "type": "string"
+    },
+    "next_year_forecast_net_sales": {
+      "type": "string"
+    },
+    "next_year_forecast_operating_profit": {
+      "type": "string"
+    },
+    "next_year_forecast_ordinary_profit": {
+      "type": "string"
+    },
+    "next_year_forecast_profit": {
+      "type": "string"
+    },
+    "next_year_forecast_earnings_per_share": {
+      "type": "string"
+    },
+    "material_changes_in_subsidiaries": {
+      "type": "string"
+    },
+    "changes_based_on_revisions_of_accounting_standard": {
+      "type": "string"
+    },
+    "changes_other_than_ones_based_on_revisions_of_accounting_standard": {
+      "type": "string"
+    },
+    "changes_in_accounting_estimates": {
+      "type": "string"
+    },
+    "retrospective_restatement": {
+      "type": "string"
+    },
+    "number_of_issued_and_outstanding_shares_at_the_end_of_fiscal_year_including_treasury_stock": {
+      "type": "string"
+    },
+    "number_of_treasury_stock_at_the_end_of_fiscal_year": {
+      "type": "string"
+    },
+    "average_number_of_shares": {
+      "type": "string"
+    },
+    "non_consolidated_net_sales": {
+      "type": "string"
+    },
+    "non_consolidated_operating_profit": {
+      "type": "string"
+    },
+    "non_consolidated_ordinary_profit": {
+      "type": "string"
+    },
+    "non_consolidated_profit": {
+      "type": "string"
+    },
+    "non_consolidated_earnings_per_share": {
+      "type": "string"
+    },
+    "non_consolidated_total_assets": {
+      "type": "string"
+    },
+    "non_consolidated_equity": {
+      "type": "string"
+    },
+    "non_consolidated_equity_to_asset_ratio": {
+      "type": "string"
+    },
+    "non_consolidated_book_value_per_share": {
+      "type": "string"
+    },
+    "forecast_non_consolidated_net_sales2nd_quarter": {
+      "type": "string"
+    },
+    "forecast_non_consolidated_operating_profit2nd_quarter": {
+      "type": "string"
+    },
+    "forecast_non_consolidated_ordinary_profit2nd_quarter": {
+      "type": "string"
+    },
+    "forecast_non_consolidated_profit2nd_quarter": {
+      "type": "string"
+    },
+    "forecast_non_consolidated_earnings_per_share2nd_quarter": {
+      "type": "string"
+    },
+    "next_year_forecast_non_consolidated_net_sales2nd_quarter": {
+      "type": "string"
+    },
+    "next_year_forecast_non_consolidated_operating_profit2nd_quarter": {
+      "type": "string"
+    },
+    "next_year_forecast_non_consolidated_ordinary_profit2nd_quarter": {
+      "type": "string"
+    },
+    "next_year_forecast_non_consolidated_profit2nd_quarter": {
+      "type": "string"
+    },
+    "next_year_forecast_non_consolidated_earnings_per_share2nd_quarter": {
+      "type": "string"
+    },
+    "forecast_non_consolidated_net_sales": {
+      "type": "string"
+    },
+    "forecast_non_consolidated_operating_profit": {
+      "type": "string"
+    },
+    "forecast_non_consolidated_ordinary_profit": {
+      "type": "string"
+    },
+    "forecast_non_consolidated_profit": {
+      "type": "string"
+    },
+    "forecast_non_consolidated_earnings_per_share": {
+      "type": "string"
+    },
+    "next_year_forecast_non_consolidated_net_sales": {
+      "type": "string"
+    },
+    "next_year_forecast_non_consolidated_operating_profit": {
+      "type": "string"
+    },
+    "next_year_forecast_non_consolidated_ordinary_profit": {
+      "type": "string"
+    },
+    "next_year_forecast_non_consolidated_profit": {
+      "type": "string"
+    },
+    "next_year_forecast_non_consolidated_earnings_per_share": {
+      "type": "string"
+    }
+  }
+}
