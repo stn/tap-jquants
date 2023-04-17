@@ -31,7 +31,6 @@ class DailyQuotes(IncrementalTableStream):
             return {
                 "code": code,
                 "from": start_date,
-                "to": end_date,
             }
         return {
             "date": start_date,
