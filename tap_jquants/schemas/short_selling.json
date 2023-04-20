@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sector33_code": {
+      "type": "string"
+    },
+    "selling_excluding_short_selling_turnover_value": {
+      "type": "number"
+    },
+    "short_selling_with_restrictions_turnover_value": {
+      "type": "number"
+    },
+    "short_selling_without_restrictions_turnover_value": {
+      "type": "number"
+    }
+  },
+  "additionalProperties": false
+}
