@@ -8,6 +8,7 @@ from .index_option import IndexOption
 from .indices_topix import IndicesTopix
 from .listed_info import ListedInfo
 from .markets_breakdown import MarketsBreakdown
+from .prices_am import PricesAm
 from .short_selling import ShortSelling
 from .trades_spec import TradesSpec
 from .weekly_margin_interest import WeeklyMarginInterest
@@ -20,6 +21,7 @@ STREAMS: Mapping[str, Type[BaseStream]] = {
     IndicesTopix.tap_stream_id: IndicesTopix,
     ListedInfo.tap_stream_id: ListedInfo,
     MarketsBreakdown.tap_stream_id: MarketsBreakdown,
+    PricesAm.tap_stream_id: PricesAm,
     ShortSelling.tap_stream_id: ShortSelling,
     TradesSpec.tap_stream_id: TradesSpec,
     WeeklyMarginInterest.tap_stream_id: WeeklyMarginInterest,
