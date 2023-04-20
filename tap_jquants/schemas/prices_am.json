@@ -1,0 +1,49 @@
+{
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "code": {
+      "type": "string"
+    },
+    "morning_open": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "morning_high": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "morning_low": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "morning_close": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "morning_volume": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "morning_turnover_value": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
