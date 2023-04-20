@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "code": {
+      "type": "string"
+    },
+    "short_margin_trade_volume": {
+      "type": "number"
+    },
+    "long_margin_trade_volume": {
+      "type": "number"
+    },
+    "short_negotiable_margin_trade_volume": {
+      "type": "number"
+    },
+    "long_negotiable_margin_trade_volume": {
+      "type": "number"
+    },
+    "short_standardized_margin_trade_volume": {
+      "type": "number"
+    },
+    "long_standardized_margin_trade_volume": {
+      "type": "number"
+    },
+    "issue_type": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

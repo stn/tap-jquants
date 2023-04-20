@@ -8,6 +8,7 @@ from .index_option import IndexOption
 from .indices_topix import IndicesTopix
 from .listed_info import ListedInfo
 from .trades_spec import TradesSpec
+from .weekly_margin_interest import WeeklyMarginInterest
 
 STREAMS: Mapping[str, Type[BaseStream]] = {
     DailyQuotes.tap_stream_id: DailyQuotes,
@@ -17,4 +18,5 @@ STREAMS: Mapping[str, Type[BaseStream]] = {
     IndicesTopix.tap_stream_id: IndicesTopix,
     ListedInfo.tap_stream_id: ListedInfo,
     TradesSpec.tap_stream_id: TradesSpec,
+    WeeklyMarginInterest.tap_stream_id: WeeklyMarginInterest,
 }
