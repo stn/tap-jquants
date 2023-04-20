@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "code": {
+      "type": "string"
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "fiscal_year": {
+      "type": "string"
+    },
+    "sector_name": {
+      "type": "string"
+    },
+    "fiscal_quarter": {
+      "type": "string"
+    },
+    "section": {
+      "type": "string"
+    }
+  }
+}
