@@ -1,0 +1,100 @@
+{
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "code": {
+      "type": "string"
+    },
+    "whole_day_open": {
+      "type": "number"
+    },
+    "whole_day_high": {
+      "type": "number"
+    },
+    "whole_day_low": {
+      "type": "number"
+    },
+    "whole_day_close": {
+      "type": "number"
+    },
+    "night_session_open": {
+      "type": ["null", "number"]
+    },
+    "night_session_high": {
+      "type": ["null", "number"]
+    },
+    "night_session_low": {
+      "type": ["null", "number"]
+    },
+    "night_session_close": {
+      "type": ["null", "number"]
+    },
+    "day_session_open": {
+      "type": "number"
+    },
+    "day_session_high": {
+      "type": "number"
+    },
+    "day_session_low": {
+      "type": "number"
+    },
+    "day_session_close": {
+      "type": "number"
+    },
+    "volume": {
+      "type": "number"
+    },
+    "open_interest": {
+      "type": "number"
+    },
+    "turnover_value": {
+      "type": "number"
+    },
+    "contract_month": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "strike_price": {
+      "type": "number"
+    },
+    "volume__only_auction": {
+      "type": "number"
+    },
+    "emergency_margin_trigger_division": {
+      "type": "string"
+    },
+    "put_call_division": {
+      "type": "string"
+    },
+    "last_trading_day": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "special_quotation_day": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "settlement_price": {
+      "type": "number"
+    },
+    "theoretical_price": {
+      "type": "number"
+    },
+    "base_volatility": {
+      "type": "number"
+    },
+    "underlying_price": {
+      "type": "number"
+    },
+    "implied_volatility": {
+      "type": "number"
+    },
+    "interest_rate": {
+      "type": "number"
+    }
+  },
+  "additionalProperties": false
+}
