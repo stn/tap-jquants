@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Iterator, List, Optional, Tuple
 
 from singer import Transformer, metrics, utils, write_record, write_state
 from singer.logger import get_logger
@@ -257,9 +257,19 @@ class FullTableStream(BaseStream, ABC):
     valid_replication_keys = None
     replication_key = None
 
-    @abstractmethod
-    def get_records(self):
-        """Extracts Records."""
+    def make_params(self) -> Dict:
+        """Creates params for API Call.
+        The default implementation returns an empty."""
+        return {}
+
+    def get_records(self) -> Iterator[Dict]:
+        """Performs API calls to extract data for each site."""
+        params = self.make_params()
+        LOGGER.info(f"params = {params}")
+        data = self.client.get(self.path, params)
+        # transforms data by converting camelCase fields to snake_case fields
+        transformed_records = convert_json(data)
+        yield from transformed_records.get(self.data_key, [])
 
     def sync(self, state: Dict, schema: Dict, stream_metadata: Dict):
         LOGGER.info("sync called from %s", self.__class__)
