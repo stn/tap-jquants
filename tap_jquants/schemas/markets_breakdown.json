@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "code": {
+      "type": "string"
+    },
+    "long_sell_value": {
+      "type": "number"
+    },
+    "short_sell_without_margin_value": {
+      "type": "number"
+    },
+    "margin_sell_new_value": {
+      "type": "number"
+    },
+    "margin_sell_close_value": {
+      "type": "number"
+    },
+    "long_buy_value": {
+      "type": "number"
+    },
+    "margin_buy_new_value": {
+      "type": "number"
+    },
+    "margin_buy_close_value": {
+      "type": "number"
+    },
+    "long_sell_volume": {
+      "type": "number"
+    },
+    "short_sell_without_margin_volume": {
+      "type": "number"
+    },
+    "margin_sell_new_volume": {
+      "type": "number"
+    },
+    "margin_sell_close_volume": {
+      "type": "number"
+    },
+    "long_buy_volume": {
+      "type": "number"
+    },
+    "margin_buy_new_volume": {
+      "type": "number"
+    },
+    "margin_buy_close_volume": {
+      "type": "number"
+    }
+  },
+  "additionalProperties": false
+}
