@@ -45,29 +45,14 @@ coverage.xml
 *,cover
 .hypothesis/
 
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-local_settings.py
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
 # Sphinx documentation
 docs/_build/
 
 # PyBuilder
 target/
 
-# IPython Notebook
-.ipynb_checkpoints
+# mypy
+.mypy_cache
 
 # pyenv
 .python-version
@@ -79,6 +64,7 @@ celerybeat-schedule
 .env
 
 # virtualenv
+.venv/
 venv/
 ENV/
 
