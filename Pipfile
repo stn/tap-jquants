@@ -18,6 +18,10 @@ mypy = "*"
 types-requests = "*"
 pre-commit = "*"
 
+[scripts]
+postinstall = "pre-commit install"
+
 [requires]
 python_version = "3.9"
 python_full_version = "3.9.16"
+
