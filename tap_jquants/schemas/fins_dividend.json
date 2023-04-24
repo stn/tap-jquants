@@ -1,0 +1,76 @@
+{
+  "type": "object",
+  "properties": {
+    "announcement_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "announcement_time": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "reference_number": {
+      "type": "string"
+    },
+    "status_code": {
+      "type": "string"
+    },
+    "board_meeting_date": {
+      "type": "string"
+    },
+    "interim_final_code": {
+      "type": "string"
+    },
+    "forecast_result_code": {
+      "type": "string"
+    },
+    "interim_final_term": {
+      "type": "string"
+    },
+    "gross_dividend_rate": {
+      "type": "string"
+    },
+    "record_date": {
+      "type": "string"
+    },
+    "ex_date": {
+      "type": "string"
+    },
+    "actual_record_date": {
+      "type": "string"
+    },
+    "payable_date": {
+      "type": "string"
+    },
+    "ca_reference_number": {
+      "type": "string"
+    },
+    "distribution_amount": {
+      "type": ["null", "string"]
+    },
+    "retained_earnings": {
+      "type": ["null", "string"]
+    },
+    "deemed_dividend": {
+      "type": ["null", "string"]
+    },
+    "deemed_capital_gains": {
+      "type": ["null", "string"]
+    },
+    "net_asset_decrease_ratio": {
+      "type": ["null", "string"]
+    },
+    "commemorative_special_code": {
+      "type": ["null", "string"]
+    },
+    "commemorative_dividend_rate": {
+      "type": ["null", "string"]
+    },
+    "special_dividend_rate": {
+      "type": ["null", "string"]
+    }
+  },
+  "additionalProperties": false
+}
