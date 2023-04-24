@@ -91,7 +91,7 @@ class JquantsClient:
 
         LOGGER.info("Get a refresh token, token expires = %s", self._refresh_token_expires)
 
-    @utils.ratelimit(12, 60)
+    @utils.ratelimit(1, 5)
     def request(self, method: str, path: str = None, params: Dict = None, **kwargs) -> Any:
         """Wrapper method around request.sessions get/post method using
         the session object of JquantsClient object."""
