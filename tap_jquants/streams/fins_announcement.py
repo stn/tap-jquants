@@ -6,6 +6,7 @@ LOGGER = get_logger()
 
 # 決算発表予定日(/fins/announcement)
 # https://jpx.gitbook.io/j-quants-ja/api-reference/announcement
+# パラメータにdateを持たないことに注意。
 
 
 class FinsAnnouncement(IncrementalTableStream):

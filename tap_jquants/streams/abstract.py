@@ -86,7 +86,7 @@ class IncrementalTableStream(BaseStream, ABC):
     records_extracted = 0
 
     @staticmethod
-    def get_bookmark(state: Dict, stream: str, default: str) -> str:
+    def get_bookmark(state: Dict, stream: str, default=None) -> str:
         """Fetches the bookmark from the state file for a given stream."""
         if (state is None) or ("bookmarks" not in state):
             return default
@@ -95,7 +95,13 @@ class IncrementalTableStream(BaseStream, ABC):
     @property
     def date_window_size(self) -> int:
         """The number of days to request data.
-        The default is 0, and it is assumed to be not specified."""
+        The default is 1. If it is 0, end_dt is set to today."""
+        return 1
+
+    @property
+    def bookmark_offset(self) -> int:
+        """The number of days to proceed data against bookmark.
+        The default is 1."""
         return 1
 
     def write_bookmark(self, state: Dict, value: str) -> None:
@@ -109,11 +115,11 @@ class IncrementalTableStream(BaseStream, ABC):
     def get_start_and_end_times(self, state: Dict, stream: str) -> Tuple[datetime, datetime]:
         """Gets start and end times."""
         # get the bookmark from state file
-        report_bookmark = self.get_bookmark(state, stream, self.config.get("start_date"))
-
-        start_dt_tm = utils.strptime_to_utc(report_bookmark)
-        if start_dt_tm > self.now_dt_tm:
-            start_dt_tm = self.now_dt_tm
+        report_bookmark = self.get_bookmark(state, stream)
+        if report_bookmark:
+            start_dt_tm = utils.strptime_to_utc(report_bookmark) + timedelta(days=self.bookmark_offset)
+        else:
+            start_dt_tm = utils.strptime_to_utc(self.config.get("start_date"))
 
         if self.date_window_size > 0:
             end_dt_tm = start_dt_tm + timedelta(days=self.date_window_size)
@@ -129,9 +135,13 @@ class IncrementalTableStream(BaseStream, ABC):
         Sets end_date_time of new window to date_window_size days ahead
         since start_date_time."""
         start_dt_tm = end_dt_tm
-        end_dt_tm = start_dt_tm + timedelta(days=self.date_window_size)
-        if end_dt_tm > self.now_dt_tm:
-            end_dt_tm = self.now_dt_tm
+        if self.date_window_size > 0:
+            end_dt_tm = start_dt_tm + timedelta(days=self.date_window_size)
+            if end_dt_tm > self.now_dt_tm:
+                end_dt_tm = self.now_dt_tm + timedelta(days=1)
+        else:
+            end_dt_tm = self.now_dt_tm + timedelta(days=1)
+
         return start_dt_tm, end_dt_tm
 
     def make_payload(self, start_date: str, end_date: str, stream_metadata: Dict) -> Dict:
@@ -158,12 +168,10 @@ class IncrementalTableStream(BaseStream, ABC):
         stream_metadata: Dict,
         records: List,
         time_extracted: datetime,
-        max_bookmark_value=None,
-        last_datetime=None,
-    ) -> str:
+    ) -> Optional[str]:
         """Filters out the unselected fields by the user Picks the latest
         bookmark value from extracted data Writes the records to stdout."""
-
+        max_bookmark_dt_tm = None
         with metrics.record_counter(self.tap_stream_id) as counter:
             for record in records:
                 # Transform record for Singer.io
@@ -171,29 +179,25 @@ class IncrementalTableStream(BaseStream, ABC):
                     transformed_record = transformer.transform(record, schema, stream_metadata)
 
                     # Reset max_bookmark_value to new value if higher
-                    if self.replication_key in transformed_record:  # replication_keyが日付ではないケースは実際には考慮していない
+                    if self.replication_key in transformed_record:  # replication_keyが日付ではないケースは考慮していない
                         bookmark_date = transformed_record.get(self.replication_key)
-                        bookmark_dt_tm = utils.strptime_to_utc(bookmark_date)  # 今回の値
-                        last_dt_tm = utils.strptime_to_utc(last_datetime)  # 前回の値
-
-                        # Update max_bookmark_value
-                        if not max_bookmark_value:
-                            max_bookmark_value = last_datetime  # maxは一旦、前回の値
-                        max_bookmark_dt_tm = utils.strptime_to_utc(max_bookmark_value)
-                        if bookmark_dt_tm > max_bookmark_dt_tm:  # maxよりデータの方が大きかったら
-                            max_bookmark_value = utils.strftime(bookmark_dt_tm)  # maxを更新
-
-                        # Keep only records whose bookmark is after the last_datetime
-                        if bookmark_dt_tm >= last_dt_tm:
-                            write_record(self.tap_stream_id, transformed_record, time_extracted=time_extracted)
-                            counter.increment()
+                        bookmark_dt_tm = utils.strptime_to_utc(bookmark_date)
+                        if max_bookmark_dt_tm:
+                            if bookmark_dt_tm > max_bookmark_dt_tm:
+                                max_bookmark_dt_tm = bookmark_dt_tm
+                        else:
+                            max_bookmark_dt_tm = bookmark_dt_tm
+                        write_record(self.tap_stream_id, transformed_record, time_extracted=time_extracted)
+                        counter.increment()
                     else:
                         write_record(self.tap_stream_id, transformed_record, time_extracted=time_extracted)
                         counter.increment()
 
             LOGGER.info(f"Stream: {self.tap_stream_id}, Processed {counter.value} records")
             self.records_extracted += counter.value
-            return max_bookmark_value
+            if max_bookmark_dt_tm:
+                return utils.strftime(max_bookmark_dt_tm)
+            return None
 
     def get_records(self, state: Dict, schema: Dict, stream_metadata: Dict) -> None:
         """Sync the data for a given stream.
@@ -201,8 +205,6 @@ class IncrementalTableStream(BaseStream, ABC):
         start_dt_tm, end_dt_tm = self.get_start_and_end_times(state, self.tap_stream_id)
         LOGGER.info(f"bookmark value or start date for {self.tap_stream_id}: {start_dt_tm}")
         while start_dt_tm < end_dt_tm:
-            last_datetime = self.get_bookmark(state, self.tap_stream_id, self.config.get("start_date"))
-            bookmark_value = last_datetime
             start_str, end_str = utils.strftime(start_dt_tm)[:10], utils.strftime(end_dt_tm)[:10]
 
             LOGGER.info(f"Running sync for {self.tap_stream_id} between date window {start_str} {end_str}")
@@ -212,7 +214,6 @@ class IncrementalTableStream(BaseStream, ABC):
             LOGGER.info(f"params = {params}, payload = {payload}")
             data = self.client.get(self.path, endpoint=self.tap_stream_id, params=params, json=payload)
             if not data:
-                self.write_bookmark(state, bookmark_value)
                 LOGGER.info(f"There are no raw data records for date window {start_dt_tm} to {end_dt_tm}")
                 start_dt_tm, end_dt_tm = self.proceed_start_end_dt_tm(end_dt_tm)
                 continue
@@ -222,7 +223,6 @@ class IncrementalTableStream(BaseStream, ABC):
                 transformed_data = convert_json(data)[self.data_key]
 
             if not transformed_data:
-                self.write_bookmark(state, bookmark_value)
                 start_dt_tm, end_dt_tm = self.proceed_start_end_dt_tm(end_dt_tm)
                 continue
 
@@ -233,10 +233,11 @@ class IncrementalTableStream(BaseStream, ABC):
                 stream_metadata,
                 transformed_data,
                 time_extracted,
-                bookmark_value,
-                last_datetime=last_datetime,
             )
-            self.write_bookmark(state, bookmark_value)
+            if bookmark_value:
+                self.write_bookmark(state, bookmark_value)
+            else:
+                self.write_bookmark(state, utils.strftime(start_dt_tm))
 
             start_dt_tm, end_dt_tm = self.proceed_start_end_dt_tm(end_dt_tm)
 

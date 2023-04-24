@@ -27,5 +27,4 @@ class IndicesTopix(IncrementalTableStream):
         """Creates params for API Call."""
         return {
             "from": start_date,
-            "to": end_date,
         }
