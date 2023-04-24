@@ -3,6 +3,7 @@ from typing import Mapping, Type
 from .abstract import BaseStream
 from .daily_quotes import DailyQuotes
 from .fins_announcement import FinsAnnouncement
+from .fins_dividend import FinsDividend
 from .fins_statements import FinsStatements
 from .index_option import IndexOption
 from .indices_topix import IndicesTopix
@@ -16,6 +17,7 @@ from .weekly_margin_interest import WeeklyMarginInterest
 STREAMS: Mapping[str, Type[BaseStream]] = {
     DailyQuotes.tap_stream_id: DailyQuotes,
     FinsAnnouncement.tap_stream_id: FinsAnnouncement,
+    FinsDividend.tap_stream_id: FinsDividend,
     FinsStatements.tap_stream_id: FinsStatements,
     IndexOption.tap_stream_id: IndexOption,
     IndicesTopix.tap_stream_id: IndicesTopix,
