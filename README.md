@@ -7,10 +7,18 @@ This tap:
 
 - Pulls raw data from [J-Quants](https://jpx-jquants.com/)
 - Extracts the following resources:
-  - [listed_info](https://jpx.gitbook.io/j-quants-ja/api-reference/listed_info)
   - [daily_quotes](https://jpx.gitbook.io/j-quants-ja/api-reference/daily_quotes)
+  - [fins_announcement](https://jpx.gitbook.io/j-quants-ja/api-reference/announcement)
+  - [fins_dividend](https://jpx.gitbook.io/j-quants-ja/api-reference/dividend)
+  - [fins_statements](https://jpx.gitbook.io/j-quants-ja/api-reference/statements)
+  - [index_option](https://jpx.gitbook.io/j-quants-ja/api-reference/index_option)
+  - [indices_topix](https://jpx.gitbook.io/j-quants-ja/api-reference/topix)
+  - [listed_info](https://jpx.gitbook.io/j-quants-ja/api-reference/listed_info)
+  - [markets_breakdown](https://jpx.gitbook.io/j-quants-ja/api-reference/breakdown)
+  - [prices_am](https://jpx.gitbook.io/j-quants-ja/api-reference/prices_am)
+  - [short_selling](https://jpx.gitbook.io/j-quants-ja/api-reference/short_selling)
   - [trades_spec](https://jpx.gitbook.io/j-quants-ja/api-reference/trades_spec)
-  - [topix](https://jpx.gitbook.io/j-quants-ja/api-reference/topix)
+  - [weekly_margin_interest](https://jpx.gitbook.io/j-quants-ja/api-reference/weekly_margin_interest)
 - Outputs the schema for each resource
 - Incrementally pulls data based on the input state
 
@@ -47,7 +55,7 @@ Pythonの仮想環境を用いることが推奨されます。
 ### 3. tapの設定
 
 J-Quantsに登録したアカウントを用いて、以下のようなファイルを作成してください。
-`start_date` 直近の営業日あるいは1営業日前を指定するといいでしょう
+`start_date` 直近の営業日あるいはその1営業日前を指定するといいでしょう
 （[データの更新頻度・更新タイミング](https://jpx.gitbook.io/j-quants-ja/outline/data-update)）。
 ファイル名は任意ですが、ここでは `config.json` とします。
 
@@ -102,10 +110,11 @@ J-Quantsへの認証が成功することを確認してください。
 ここでは`tap-jquants`の結果をCSVで書き出すことにします。
 
 ```shell
-> venv/bin/tap-jquants --config config.json --catalog catalog.json | venv/bin/target-csv
+> venv/bin/tap-jquants --config config.json --catalog catalog.json \
+| venv/bin/target-csv
 ```
 
-結果は`daily_quotes-YYYYMMDDThhmmss.csv`というファイルに出力されます。
+結果は`daily_quotes.csv`というファイルに出力されます。
 
 ### 7. 次のステップ
 
@@ -114,9 +123,9 @@ J-Quantsへの認証が成功することを確認してください。
 [Singer](https://singer.io) tapとしてJ-Quants APIを利用可能にする `tap-jquants` を用いることで、
 コードを書くことなくJSONファイルによる設定だけでデータを取得できるようになりました。
 
-ここでは説明しませんでしたが、tapが最後に出力している
+また、tapが最後に出力している
 `{"currently_syncing": null, "bookmarks": {"daily_quotes": "2023-04-14"}}`
-という行を `state.json` などに保存し、`--state state.json` と指定することで、
+という行を `state.json` に保存し、`--state state.json` と指定することで、
 インクリメンタルなアップデートが可能となります。
 
 また、[meltano](https://meltano.com/) を利用することで、
@@ -128,7 +137,7 @@ J-Quantsへの認証が成功することを確認してください。
 `singer-check-tap` をtargetに指定することで詳細な情報を得ることができます。
 
 ```shell
-❯ tap-jquants --config config.json --catalog catalog.json| singer-check-tap 
+$ tap-jquants --config config.json --catalog catalog.json| singer-check-tap 
 Checking stdin for valid Singer-formatted data
 INFO Get a refresh token, token expires = 2023-04-24 02:57:47.781546+00:00
 INFO Get the id token, token expires = 2023-04-18 02:57:50.130585+00:00
