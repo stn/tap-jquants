@@ -10,7 +10,6 @@ singer-python = "==5.13.0"
 
 [dev-packages]
 singer-tools = "*"
-target-csv = "*"
 black = "*"
 isort = "*"
 flake8 = "*"
@@ -24,4 +23,3 @@ postinstall = "pre-commit install"
 [requires]
 python_version = "3.9"
 python_full_version = "3.9.16"
-
