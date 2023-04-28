@@ -21,6 +21,7 @@ class DailyQuotes(IncrementalTableStream):
     ]
     valid_replication_keys = ["date"]
     date_window_size = 1
+    skip_non_business_day = True
 
     data_key = "daily_quotes"
 

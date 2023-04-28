@@ -104,6 +104,12 @@ class IncrementalTableStream(BaseStream, ABC):
         The default is 1."""
         return 1
 
+    @property
+    def skip_non_business_day(self) -> bool:
+        """The flag to skip non-business days.
+        The default is False."""
+        return False
+
     def write_bookmark(self, state: Dict, value: str) -> None:
         """Writes bookmark to state file for a given stream."""
         if "bookmarks" not in state:
@@ -118,6 +124,7 @@ class IncrementalTableStream(BaseStream, ABC):
         report_bookmark = self.get_bookmark(state, stream)
         if report_bookmark:
             start_dt_tm = utils.strptime_to_utc(report_bookmark) + timedelta(days=self.bookmark_offset)
+            start_dt_tm = self.get_start_dt_tm_in_business(start_dt_tm)
         else:
             start_dt_tm = utils.strptime_to_utc(self.config.get("start_date"))
 
@@ -135,6 +142,7 @@ class IncrementalTableStream(BaseStream, ABC):
         Sets end_date_time of new window to date_window_size days ahead
         since start_date_time."""
         start_dt_tm = end_dt_tm
+        start_dt_tm = self.get_start_dt_tm_in_business(start_dt_tm)
         if self.date_window_size > 0:
             end_dt_tm = start_dt_tm + timedelta(days=self.date_window_size)
             if end_dt_tm > self.now_dt_tm:
@@ -143,6 +151,19 @@ class IncrementalTableStream(BaseStream, ABC):
             end_dt_tm = self.now_dt_tm + timedelta(days=1)
 
         return start_dt_tm, end_dt_tm
+
+    def get_start_dt_tm_in_business(self, start_dt_tm) -> datetime:
+        """Gets start_dt_tm in business day if skip_holiday is True."""
+        if self.skip_non_business_day:
+            if start_dt_tm.month == 1 and start_dt_tm.day <= 3:
+                return start_dt_tm + timedelta(days=4 - start_dt_tm.day)
+            elif start_dt_tm.month == 12 and start_dt_tm.day == 31:
+                return start_dt_tm + timedelta(days=4)
+            elif start_dt_tm.weekday() == 5:
+                return start_dt_tm + timedelta(days=2)
+            elif start_dt_tm.weekday() == 6:
+                return start_dt_tm + timedelta(days=1)
+        return start_dt_tm
 
     def make_payload(self, start_date: str, end_date: str, stream_metadata: Dict) -> Dict:
         """Creates payload for POST API Call.
