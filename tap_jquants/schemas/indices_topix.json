@@ -6,16 +6,16 @@
       "format": "date-time"
     },
     "open": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "high": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "low": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "close": {
-      "type": "number"
+      "type": ["null", "number"]
     }
   },
   "additionalProperties": false

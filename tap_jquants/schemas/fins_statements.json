@@ -13,7 +13,7 @@
       "type": "string"
     },
     "type_of_document": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "type_of_current_period": {
       "type": ["null", "string"]

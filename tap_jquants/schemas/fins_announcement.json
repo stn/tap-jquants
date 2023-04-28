@@ -10,19 +10,19 @@
       "type": "string"
     },
     "company_name": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "fiscal_year": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "sector_name": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "fiscal_quarter": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "section": {
-      "type": "string"
+      "type": ["null", "string"]
     }
   }
 }
