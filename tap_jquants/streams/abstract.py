@@ -8,6 +8,7 @@ from singer.metadata import get_standard_metadata
 
 from ..helpers import convert_json
 
+PAGINATION_KEY = "pagination_key"
 LOGGER = get_logger()
 
 
@@ -236,6 +237,7 @@ class IncrementalTableStream(BaseStream, ABC):
             data = self.client.get(self.path, endpoint=self.tap_stream_id, params=params, json=payload)
             if not data:
                 LOGGER.info(f"There are no raw data records for date window {start_dt_tm} to {end_dt_tm}")
+                self.write_bookmark(state, utils.strftime(start_dt_tm))
                 start_dt_tm, end_dt_tm = self.proceed_start_end_dt_tm(end_dt_tm)
                 continue
 
@@ -243,7 +245,16 @@ class IncrementalTableStream(BaseStream, ABC):
             if self.data_key in data:
                 transformed_data = convert_json(data)[self.data_key]
 
+            while PAGINATION_KEY in data:
+                pagination_key = data[PAGINATION_KEY]
+                LOGGER.info(f"continuing pagination len(data)={len(transformed_data)}")
+                params[PAGINATION_KEY] = pagination_key
+                data = self.client.get(self.path, endpoint=self.tap_stream_id, params=params, json=payload)
+                if self.data_key in data:
+                    transformed_data.extend(convert_json(data)[self.data_key])
+
             if not transformed_data:
+                self.write_bookmark(state, utils.strftime(start_dt_tm))
                 start_dt_tm, end_dt_tm = self.proceed_start_end_dt_tm(end_dt_tm)
                 continue
 
