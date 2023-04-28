@@ -17,160 +17,160 @@
       "type": "string"
     },
     "proprietary_sales": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "proprietary_purchases": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "proprietary_total": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "proprietary_balance": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "brokerage_sales": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "brokerage_purchases": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "brokerage_total": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "brokerage_balance": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "total_sales": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "total_purchases": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "total_total": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "total_balance": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "individuals_sales": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "individuals_purchases": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "individuals_total": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "individuals_balance": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "foreigners_sales": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "foreigners_purchases": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "foreigners_total": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "foreigners_balance": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "securities_cos_sales": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "securities_cos_purchases": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "securities_cos_total": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "securities_cos_balance": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "investment_trusts_sales": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "investment_trusts_purchases": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "investment_trusts_total": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "investment_trusts_balance": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "business_cos_sales": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "business_cos_purchases": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "business_cos_total": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "business_cos_balance": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "other_cos_sales": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "other_cos_purchases": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "other_cos_total": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "other_cos_balance": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "insurance_cos_sales": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "insurance_cos_purchases": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "insurance_cos_total": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "insurance_cos_balance": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "city_bks_regional_bks_etc_sales": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "city_bks_regional_bks_etc_purchases": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "city_bks_regional_bks_etc_total": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "city_bks_regional_bks_etc_balance": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "trust_banks_sales": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "trust_banks_purchases": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "trust_banks_total": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "trust_banks_balance": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "other_financial_institutions_sales": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "other_financial_institutions_purchases": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "other_financial_institutions_total": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "other_financial_institutions_balance": {
-      "type": "number"
+      "type": ["null", "number"]
     }
   },
   "additionalProperties": false

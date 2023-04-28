@@ -9,46 +9,46 @@
       "type": "string"
     },
     "long_sell_value": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "short_sell_without_margin_value": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "margin_sell_new_value": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "margin_sell_close_value": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "long_buy_value": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "margin_buy_new_value": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "margin_buy_close_value": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "long_sell_volume": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "short_sell_without_margin_volume": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "margin_sell_new_volume": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "margin_sell_close_volume": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "long_buy_volume": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "margin_buy_new_volume": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "margin_buy_close_volume": {
-      "type": "number"
+      "type": ["null", "number"]
     }
   },
   "additionalProperties": false

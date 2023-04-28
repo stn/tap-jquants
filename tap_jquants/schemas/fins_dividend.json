@@ -15,37 +15,37 @@
       "type": "string"
     },
     "status_code": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "board_meeting_date": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "interim_final_code": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "forecast_result_code": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "interim_final_term": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "gross_dividend_rate": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "record_date": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "ex_date": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "actual_record_date": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "payable_date": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "ca_reference_number": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "distribution_amount": {
       "type": ["null", "string"]

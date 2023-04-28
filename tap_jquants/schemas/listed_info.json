@@ -10,31 +10,31 @@
       "type": "string"
     },
     "company_name": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "company_name_english": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "sector17_code": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "sector17_code_name": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "sector33_code": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "sector33_code_name": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "scale_category": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "market_code": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "market_code_name": {
-      "type": "string"
+      "type": ["null", "string"]
     }
   }
 }

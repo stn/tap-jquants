@@ -9,25 +9,25 @@
       "type": "string"
     },
     "short_margin_trade_volume": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "long_margin_trade_volume": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "short_negotiable_margin_trade_volume": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "long_negotiable_margin_trade_volume": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "short_standardized_margin_trade_volume": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "long_standardized_margin_trade_volume": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "issue_type": {
-      "type": "string"
+      "type": ["null", "string"]
     }
   },
   "additionalProperties": false

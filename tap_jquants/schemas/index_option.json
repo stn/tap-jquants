@@ -9,16 +9,16 @@
       "type": "string"
     },
     "whole_day_open": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "whole_day_high": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "whole_day_low": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "whole_day_close": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "night_session_open": {
       "type": ["null", "number"]
@@ -33,67 +33,67 @@
       "type": ["null", "number"]
     },
     "day_session_open": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "day_session_high": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "day_session_low": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "day_session_close": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "volume": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "open_interest": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "turnover_value": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "contract_month": {
-      "type": "string",
+      "type": ["null", "string"],
       "format": "date-time"
     },
     "strike_price": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "volume__only_auction": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "emergency_margin_trigger_division": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "put_call_division": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "last_trading_day": {
-      "type": "string",
+      "type": ["null", "string"],
       "format": "date-time"
     },
     "special_quotation_day": {
-      "type": "string",
+      "type": ["null", "string"],
       "format": "date-time"
     },
     "settlement_price": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "theoretical_price": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "base_volatility": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "underlying_price": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "implied_volatility": {
-      "type": "number"
+      "type": ["null", "number"]
     },
     "interest_rate": {
-      "type": "number"
+      "type": ["null", "number"]
     }
   },
   "additionalProperties": false
