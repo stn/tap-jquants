@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="tap-jquants",
-    version="0.1.1",
+    version="0.1.2",
     description="Singer.io tap for J-Quants",
     author="Akira Ishino",
     url="https://github.com/stn/tap-jquants",
