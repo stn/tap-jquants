@@ -22,6 +22,7 @@ class ListedInfo(IncrementalTableStream):
     valid_replication_keys = ["date"]
     date_window_size = 1
     bookmark_offset = 0
+    skip_non_business_day = True
 
     data_key = "info"
 
