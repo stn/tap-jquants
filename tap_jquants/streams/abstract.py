@@ -237,7 +237,6 @@ class IncrementalTableStream(BaseStream, ABC):
             data = self.client.get(self.path, endpoint=self.tap_stream_id, params=params, json=payload)
             if not data:
                 LOGGER.info(f"There are no raw data records for date window {start_dt_tm} to {end_dt_tm}")
-                self.write_bookmark(state, utils.strftime(start_dt_tm))
                 start_dt_tm, end_dt_tm = self.proceed_start_end_dt_tm(end_dt_tm)
                 continue
 
@@ -254,7 +253,6 @@ class IncrementalTableStream(BaseStream, ABC):
                     transformed_data.extend(convert_json(data)[self.data_key])
 
             if not transformed_data:
-                self.write_bookmark(state, utils.strftime(start_dt_tm))
                 start_dt_tm, end_dt_tm = self.proceed_start_end_dt_tm(end_dt_tm)
                 continue
 
@@ -268,8 +266,6 @@ class IncrementalTableStream(BaseStream, ABC):
             )
             if bookmark_value:
                 self.write_bookmark(state, bookmark_value)
-            else:
-                self.write_bookmark(state, utils.strftime(start_dt_tm))
 
             start_dt_tm, end_dt_tm = self.proceed_start_end_dt_tm(end_dt_tm)
 
