@@ -19,6 +19,7 @@ class TradesSpec(IncrementalTableStream):
         "published_date",
         "section",
     ]
+    replication_key = "published_date"
     valid_replication_keys = ["published_date"]
     date_window_size = 7
 

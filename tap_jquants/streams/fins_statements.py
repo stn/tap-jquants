@@ -18,6 +18,7 @@ class FinsStatements(IncrementalTableStream):
     key_properties = [
         "disclosure_number",
     ]
+    replication_key = "disclosed_date"
     valid_replication_keys = ["disclosed_date"]
     date_window_size = 1
     bookmark_offset = 0
