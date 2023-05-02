@@ -16,6 +16,7 @@ class FinsDividend(IncrementalTableStream):
     tap_stream_id = "fins_dividend"
     path = "fins/dividend"
     key_properties = ["reference_number"]
+    replication_key = "announcement_date"
     valid_replication_keys = ["announcement_date"]
     date_window_size = 1
 
