@@ -6,6 +6,9 @@
       "type": "string",
       "format": "date-time"
     },
+    "disclosed_time": {
+      "type": "string"
+    },
     "local_code": {
       "type": "string"
     },
