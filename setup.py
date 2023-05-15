@@ -10,7 +10,7 @@ setup(
     url="https://github.com/stn/tap-jquants",
     classifiers=["Programming Language :: Python :: 3 :: Only"],
     py_modules=["tap_jquants"],
-    install_requires=["singer-python==5.13.0", "requests==2.28.2", "backoff==1.8.0"],
+    install_requires=["singer-python==5.13.0", "requests==2.30.0", "backoff==1.8.0"],
     entry_points="""
     [console_scripts]
     tap-jquants=tap_jquants:main
