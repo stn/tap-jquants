@@ -1,51 +1,41 @@
-import os
+"""Helper functions for tap-jquants."""
+
 import re
-from typing import Dict, List
-
-import singer
-
-LOGGER = singer.get_logger()
+import typing as t
+from datetime import datetime, timedelta, timezone
 
 
-def get_abs_path(path: str):
-    """Returns absolute path for URL."""
-    return os.path.join(os.path.dirname(os.path.realpath(__file__)), path)
-
-
-def convert(name):
+def convert_key(name: str) -> str:
     """Converts a CamelCased word to snake case."""
     name = re.sub(r"\(", "_", name)
     name = re.sub(r"\)", "", name)
     return re.sub("([a-z0-9])([A-Z])", r"\1_\2", name).lower()
 
 
-# Convert keys in json array
-def convert_array(arr: List):
-    """Converts all the CamelCased dict Keys in a list to snake case Iterated
-    through each object recursively and if the object is dict type then
-    converts its key to snake case."""
-    new_arr = []
-    for element in arr:
-        if isinstance(element, list):
-            new_arr.append(convert_array(element))
-        elif isinstance(element, dict):
-            new_arr.append(convert_json(element))
-        else:
-            new_arr.append(element)
-    return new_arr
+def convert_obj(obj: object) -> object:
+    """Convert keys in the given object from camel case to snake case."""
+    if isinstance(obj, dict):
+        return convert_json(obj)
+    if isinstance(obj, list):
+        return convert_array(obj)
+    return obj
 
 
-# Convert keys in json
-def convert_json(data_object: Dict):
-    """Converts all the CamelCased Keys in a nested dictionary object to snake
-    case."""
-    out = {}
-    for key in data_object:
-        new_key = convert(key)
-        if isinstance(data_object[key], dict):
-            out[new_key] = convert_json(data_object[key])
-        elif isinstance(data_object[key], list):
-            out[new_key] = convert_array(data_object[key])
-        else:
-            out[new_key] = data_object[key]
-    return out
+def convert_array(arr: t.List) -> t.List:
+    """Convert keys in json array from camel case to snake case."""
+    return [convert_obj(elem) for elem in arr]
+
+
+def convert_json(data: t.Dict) -> t.Dict:
+    """Convert keys in the given object from camel case to snake case."""
+    return {convert_key(key): convert_obj(value) for key, value in data.items()}
+
+
+def get_next_date(date: str) -> t.Optional[str]:
+    """Returns the next date."""
+    jst = timezone(timedelta(hours=9))
+    dt = datetime.strptime(date, "%Y-%m-%d").astimezone(tz=jst)
+    new_dt = dt + timedelta(days=1)
+    if new_dt > datetime.now(tz=jst):
+        return None
+    return new_dt.strftime("%Y-%m-%d")

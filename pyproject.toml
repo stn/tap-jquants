@@ -1,14 +1,55 @@
-[tool.black]
-line-length = 120
-target-version = ['py39',]
-include = '\.pyi?$'
+[tool.poetry]
+name = "tap-jquants"
+version = "0.0.1"
+description = "`tap-jquants` is a Singer tap for JQuants, built with the Meltano Singer SDK."
+readme = "README.md"
+authors = ["Akira Ishino"]
+keywords = [
+    "ELT",
+    "JQuants",
+]
+license = "Apache 2.0"
 
-[flake8]
-profile = "black"
-max-line-length = 120
-exclude = ".git,.tox,.venv,build,dist,./tests/.env,tests"
-max-complexity = 18
+[tool.poetry.dependencies]
+python = "<3.12,>=3.7.1"
+singer-sdk = { version="^0.27.0" }
+fs-s3fs = { version = "^1.1.1", optional = true }
+requests = "^2.28.2"
 
-[tool.isort]
-profile = "black"
-multi_line_output = 3
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.1"
+singer-sdk = { version="^0.27.0", extras = ["testing"] }
+
+[tool.poetry.extras]
+s3 = ["fs-s3fs"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_unused_configs = true
+
+[tool.ruff]
+ignore = [
+    "ANN101",  # missing-type-self
+    "ANN102",  # missing-type-cls
+]
+select = ["ALL"]
+src = ["tap_jquants"]
+target-version = "py37"
+
+
+[tool.ruff.flake8-annotations]
+allow-star-arg-any = true
+
+[tool.ruff.isort]
+known-first-party = ["tap_jquants"]
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[build-system]
+requires = ["poetry-core>=1.0.8"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+# CLI declaration
+tap-jquants = 'tap_jquants.tap:TapJQuants.cli'

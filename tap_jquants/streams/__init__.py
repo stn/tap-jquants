@@ -1,30 +1,31 @@
-from typing import Mapping, Type
+"""Stream classes for tap-jquants."""
 
-from .abstract import BaseStream
-from .daily_quotes import DailyQuotes
-from .fins_announcement import FinsAnnouncement
-from .fins_dividend import FinsDividend
-from .fins_statements import FinsStatements
-from .index_option import IndexOption
-from .indices_topix import IndicesTopix
-from .listed_info import ListedInfo
-from .markets_breakdown import MarketsBreakdown
-from .prices_am import PricesAm
-from .short_selling import ShortSelling
-from .trades_spec import TradesSpec
-from .weekly_margin_interest import WeeklyMarginInterest
+from tap_jquants.streams.announcement import AnnouncementStream
+from tap_jquants.streams.breakdown import BreakdownStream
+from tap_jquants.streams.daily_quotes import DailyQuotesStream
+from tap_jquants.streams.dividend import DividendStream
+from tap_jquants.streams.index_option import IndexOptionStream
+from tap_jquants.streams.listed_info import ListedInfoStream
+from tap_jquants.streams.prices_am import PricesAmStream
+from tap_jquants.streams.short_selling import ShortSellingStream
+from tap_jquants.streams.statements import StatementsStream
+from tap_jquants.streams.topix import TopixStream
+from tap_jquants.streams.trades_spec import TradesSpecStream
+from tap_jquants.streams.trading_calendar import TradingCalendarStream
+from tap_jquants.streams.weekly_margin_interest import WeeklyMarginInterestStream
 
-STREAMS: Mapping[str, Type[BaseStream]] = {
-    DailyQuotes.tap_stream_id: DailyQuotes,
-    FinsAnnouncement.tap_stream_id: FinsAnnouncement,
-    FinsDividend.tap_stream_id: FinsDividend,
-    FinsStatements.tap_stream_id: FinsStatements,
-    IndexOption.tap_stream_id: IndexOption,
-    IndicesTopix.tap_stream_id: IndicesTopix,
-    ListedInfo.tap_stream_id: ListedInfo,
-    MarketsBreakdown.tap_stream_id: MarketsBreakdown,
-    PricesAm.tap_stream_id: PricesAm,
-    ShortSelling.tap_stream_id: ShortSelling,
-    TradesSpec.tap_stream_id: TradesSpec,
-    WeeklyMarginInterest.tap_stream_id: WeeklyMarginInterest,
-}
+__all__ = [
+    "AnnouncementStream",
+    "BreakdownStream",
+    "DailyQuotesStream",
+    "DividendStream",
+    "IndexOptionStream",
+    "TopixStream",
+    "ListedInfoStream",
+    "PricesAmStream",
+    "ShortSellingStream",
+    "StatementsStream",
+    "TradesSpecStream",
+    "TradingCalendarStream",
+    "WeeklyMarginInterestStream",
+]
