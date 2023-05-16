@@ -1,35 +1,19 @@
-from typing import Dict
+"""投資部門別情報 (/markets/trades_spec).
 
-from singer.logger import get_logger
+https://jpx.gitbook.io/j-quants-ja/api-reference/trades_spec
+"""
 
-from .abstract import IncrementalTableStream
+from __future__ import annotations
 
-LOGGER = get_logger()
-
-# 投資部門別情報(/markets/trades_spec)
-# https://jpx.gitbook.io/j-quants-ja/api-reference/trades_spec
+from tap_jquants.client import SCHEMAS_DIR, JQuantsFromStream
 
 
-class TradesSpec(IncrementalTableStream):
-    """the trades_spec stream"""
+class TradesSpecStream(JQuantsFromStream):
+    """the trades_spec stream."""
 
-    tap_stream_id = "trades_spec"
-    path = "markets/trades_spec"
-    key_properties = [
-        "published_date",
-        "section",
-    ]
+    name = "trades_spec"
+    path = "/markets/trades_spec"
+    primary_keys = ["published_date", "section"]
     replication_key = "published_date"
-    valid_replication_keys = ["published_date"]
-    date_window_size = 7
-
-    data_key = "trades_spec"
-
-    def make_params(self, start_date: str, end_date: str, stream_metadata: Dict) -> Dict:
-        """Creates params for trades_spec."""
-        section = self.config.get("section")
-        return {
-            "section": section,
-            "from": start_date,
-            "to": end_date,
-        }
+    schema_filepath = SCHEMAS_DIR / "trades_spec.json"
+    records_jsonpath = "$.trades_spec[*]"

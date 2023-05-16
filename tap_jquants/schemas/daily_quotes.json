@@ -77,37 +77,37 @@
     "morning_adjustment_volume": {
       "type": ["null", "number"]
     },
-    "after_open": {
+    "afternoon_open": {
       "type": ["null", "number"]
     },
-    "after_high": {
+    "afternoon_high": {
       "type": ["null", "number"]
     },
-    "after_low": {
+    "afternoon_low": {
       "type": ["null", "number"]
     },
-    "after_close": {
+    "afternoon_close": {
       "type": ["null", "number"]
     },
-    "after_volume": {
+    "afternoon_volume": {
       "type": ["null", "number"]
     },
-    "after_turnover_value": {
+    "afternoon_turnover_value": {
       "type": ["null", "number"]
     },
-    "after_adjustment_open": {
+    "afternoon_adjustment_open": {
       "type": ["null", "number"]
     },
-    "after_adjustment_high": {
+    "afternoon_adjustment_high": {
       "type": ["null", "number"]
     },
-    "after_adjustment_low": {
+    "afternoon_adjustment_low": {
       "type": ["null", "number"]
     },
-    "after_adjustment_close": {
+    "afternoon_adjustment_close": {
       "type": ["null", "number"]
     },
-    "after_adjustment_volume": {
+    "afternoon_adjustment_volume": {
       "type": ["null", "number"]
     }
   },

@@ -32,6 +32,9 @@
     "gross_dividend_rate": {
       "type": ["null", "string"]
     },
+    "gross_dividend_rate_num": {
+      "type": ["null", "number"]
+    },
     "record_date": {
       "type": ["null", "string"]
     },
@@ -44,23 +47,38 @@
     "payable_date": {
       "type": ["null", "string"]
     },
-    "ca_reference_number": {
+    "careference_number": {
       "type": ["null", "string"]
     },
     "distribution_amount": {
       "type": ["null", "string"]
     },
+    "distribution_amount_num": {
+      "type": ["null", "number"]
+    },
     "retained_earnings": {
       "type": ["null", "string"]
+    },
+    "retained_earnings_num": {
+      "type": ["null", "number"]
     },
     "deemed_dividend": {
       "type": ["null", "string"]
     },
+    "deemed_dividend_num": {
+      "type": ["null", "number"]
+    },
     "deemed_capital_gains": {
       "type": ["null", "string"]
     },
+    "deemed_capital_gains_num": {
+      "type": ["null", "number"]
+    },
     "net_asset_decrease_ratio": {
       "type": ["null", "string"]
+    },
+    "net_asset_decrease_ratio_num": {
+      "type": ["null", "number"]
     },
     "commemorative_special_code": {
       "type": ["null", "string"]
@@ -68,8 +86,14 @@
     "commemorative_dividend_rate": {
       "type": ["null", "string"]
     },
+    "commemorative_dividend_rate_num": {
+      "type": ["null", "number"]
+    },
     "special_dividend_rate": {
       "type": ["null", "string"]
+    },
+    "special_dividend_rate_num": {
+      "type": ["null", "number"]
     }
   },
   "additionalProperties": false

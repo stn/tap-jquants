@@ -1,35 +1,20 @@
-from typing import Dict
+"""上場銘柄一覧 (/listed/info).
 
-from singer.logger import get_logger
+https://jpx.gitbook.io/j-quants-ja/api-reference/listed_info
+"""
 
-from .abstract import IncrementalTableStream
+from __future__ import annotations
 
-LOGGER = get_logger()
-
-# 上場銘柄一覧(/listed/info)
-# https://jpx.gitbook.io/j-quants-ja/api-reference/listed_info
+from tap_jquants.client import SCHEMAS_DIR, JQuantsDateStream
 
 
-class ListedInfo(IncrementalTableStream):
-    """the listed info stream"""
+class ListedInfoStream(JQuantsDateStream):
+    """the listed_info stream."""
 
-    tap_stream_id = "listed_info"
-    path = "listed/info"
-    key_properties = [
-        "code",
-        "date",
-    ]
-    valid_replication_keys = ["date"]
-    date_window_size = 1
-    bookmark_offset = 0
-    skip_non_business_day = True
-
-    data_key = "info"
-
-    def make_params(self, start_date: str, end_date: str, stream_metadata: Dict) -> Dict:
-        """Creates params for listed_info."""
-        code = self.config.get("code")
-        return {
-            "code": code,
-            "date": start_date,
-        }
+    name = "listed_info"
+    path = "/listed/info"
+    primary_keys = ["date", "code"]
+    replication_key = "date"
+    is_sorted = True
+    schema_filepath = SCHEMAS_DIR / "listed_info.json"
+    records_jsonpath = "$.info[*]"

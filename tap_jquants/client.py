@@ -1,127 +1,142 @@
-import urllib.parse
-from datetime import datetime, timedelta, timezone
-from typing import Any, Dict
+"""REST client handling, including JQuantsStream base class."""
+
+from __future__ import annotations
+
+import sys
+import typing as t
+from pathlib import Path
+from typing import Any, Callable, Iterable
 
 import requests
-import singer
-from singer import metrics, utils
+from singer_sdk.helpers.jsonpath import extract_jsonpath
+from singer_sdk.streams import RESTStream
 
-from .exceptions import raise_for_error
+from tap_jquants.auth import JQuantsAuthenticator
+from tap_jquants.pagination import JQuantsDatePaginator
 
-BASE_URL = "https://api.jquants.com/v1"
-LOGGER = singer.get_logger()
+if sys.version_info >= (3, 8):
+    from functools import cached_property
+else:
+    from cached_property import cached_property
 
-# set default timeout of 300 seconds
-REQUEST_TIMEOUT = 300
+from .helpers import convert_json
+
+if t.TYPE_CHECKING:
+    from singer_sdk.pagination import BaseAPIPaginator
 
 
-class JquantsClient:
-    def __init__(
+_Auth = Callable[[requests.PreparedRequest], requests.PreparedRequest]
+SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
+
+
+class JQuantsStream(RESTStream):
+    """JQuants stream class."""
+
+    @property
+    def url_base(self) -> str:
+        """Return the API URL root, configurable via tap settings."""
+        return "https://api.jquants.com/v1"
+
+    next_page_token_jsonpath = "$.pagination_key"  # noqa: S105
+
+    @cached_property
+    def authenticator(self) -> _Auth:
+        """Return a new authenticator object.
+
+        Returns:
+            An authenticator instance.
+        """
+        return JQuantsAuthenticator.create_for_stream(self)
+
+    @property
+    def http_headers(self) -> dict:
+        """Return the http headers needed.
+
+        Returns:
+            A dictionary of HTTP headers.
+        """
+        headers = {}
+        if "user_agent" in self.config:
+            headers["User-Agent"] = self.config.get("user_agent")
+        return headers
+
+    def get_url_params(
         self,
-        mail_address=None,
-        password=None,
-        timeout=REQUEST_TIMEOUT,
-    ):
-        self._mail_address = mail_address
-        self._password = password
-        self._refresh_token = None
-        self._refresh_token_expires = None
-        self._id_token = None
-        self._id_token_expires = None
-        self._session = requests.Session()
-        try:
-            self.request_timeout = REQUEST_TIMEOUT if timeout in (None, 0, "0", "0.0") else float(timeout)
-        except ValueError:
-            self.request_timeout = REQUEST_TIMEOUT
+        _context: dict | None,
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization.
 
-    def __enter__(self):
-        self.get_id_token()
-        return self
+        Args:
+            context: The stream context.
+            next_page_token: The next page index or value.
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self._session.close()
+        Returns:
+            A dictionary of URL query parameters.
+        """
+        params: dict = {}
+        if next_page_token:
+            params["pagination_key"] = next_page_token
+        return params
 
-    def get_id_token(self) -> None:
-        """Get an id token"""
-        if self._id_token and self._id_token_expires > datetime.now(timezone.utc):
-            return
+    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+        """Parse the response and return an iterator of result records.
 
-        self.get_refresh_token()
-        response = self._session.post(
-            url=f"{BASE_URL}/token/auth_refresh?refreshtoken={self._refresh_token}",
-            headers={
-                "Content-Type": "application/json",
-            },
-            timeout=self.request_timeout,
+        Args:
+            response: The HTTP ``requests.Response`` object.
+
+        Yields:
+            Each record from the source.
+        """
+        yield from extract_jsonpath(
+            self.records_jsonpath,
+            input=convert_json(response.json()),
         )
 
-        if response.status_code != 200:
-            raise_for_error(response)
 
-        data = response.json()
-        self._id_token = data["idToken"]
-        self._id_token_expires = utils.now() + timedelta(hours=24)
+class JQuantsDateStream(JQuantsStream):
+    """JQuants incremental stream class based on date."""
 
-        LOGGER.info("Get the id token, token expires = %s", self._id_token_expires)
+    def get_new_paginator(self) -> BaseAPIPaginator:
+        """Return a new paginator object."""
+        return JQuantsDatePaginator()
 
-    def get_refresh_token(self) -> None:
-        """Get a refresh token"""
-        if self._refresh_token and self._refresh_token_expires > datetime.now(timezone.utc):
-            return
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
+        """Return a dictionary of parameters to use in the URL."""
+        params: dict = {}
+        if next_page_token is not None:
+            date_key, pagination_key = next_page_token
+            if pagination_key:
+                params["pagination_key"] = next_page_token
+            params["date"] = date_key
+        else:
+            starting_date = self.get_starting_timestamp(context)
+            if starting_date:
+                params["date"] = starting_date.strftime("%Y-%m-%d")
+        self.logger.info("URL params: %s", params)
+        return params
 
-        response = self._session.post(
-            url=f"{BASE_URL}/token/auth_user",
-            headers={
-                "Content-Type": "application/json",
-            },
-            json={
-                "mailaddress": self._mail_address,
-                "password": self._password,
-            },
-            timeout=self.request_timeout,
-        )
-        LOGGER.debug(response)
 
-        if response.status_code != 200:
-            raise_for_error(response)
+class JQuantsFromStream(JQuantsStream):
+    """JQuants incremental stream class based on from."""
 
-        data = response.json()
-        self._refresh_token = data["refreshToken"]
-        self._refresh_token_expires = utils.now() + timedelta(weeks=1)
-
-        LOGGER.info("Get a refresh token, token expires = %s", self._refresh_token_expires)
-
-    @utils.ratelimit(1, 5)
-    def request(self, method: str, path: str = None, params: Dict = None, **kwargs) -> Any:
-        """Wrapper method around request.sessions get/post method using
-        the session object of JquantsClient object."""
-
-        self.get_id_token()
-
-        if params:
-            params = {k: v for k, v in params.items() if v is not None}
-        url = f"{BASE_URL}/{path}?{urllib.parse.urlencode(params)}" if params else f"{BASE_URL}/{path}"
-
-        endpoint = kwargs.pop("endpoint", None)
-        kwargs["headers"] = kwargs.get("headers", {})
-        kwargs["headers"]["Authorization"] = f"Bearer {self._id_token}"
-        if method == "POST":
-            kwargs["headers"]["Content-Type"] = "application/json"
-
-        with metrics.http_request_timer(endpoint) as timer:
-            response = self._session.request(method, url, timeout=self.request_timeout, **kwargs)
-            timer.tags[metrics.Tag.http_status_code] = response.status_code
-
-        if response.status_code != 200:
-            raise_for_error(response)
-
-        response.encoding = "utf-8"
-        return response.json()
-
-    def get(self, path: str, params: Dict = None, **kwargs) -> Any:
-        """wrapper for get method."""
-        return self.request("GET", path=path, params=params, **kwargs)
-
-    def post(self, path: str, params: Dict = None, **kwargs) -> Any:
-        """wrapper for post method."""
-        return self.request("POST", path=path, params=params, **kwargs)
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
+        """Return a dictionary of parameters to use in the URL."""
+        params: dict = {}
+        if next_page_token is not None:
+            pagination_key = next_page_token
+            if pagination_key:
+                params["pagination_key"] = next_page_token
+        starting_date = self.get_starting_timestamp(context)
+        if starting_date:
+            params["from"] = starting_date.strftime("%Y-%m-%d")
+        self.logger.info("URL params: %s", params)
+        return params

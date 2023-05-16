@@ -1,38 +1,20 @@
-from typing import Dict
+"""株価四本値 (/prices/daily_quotes).
 
-from singer.logger import get_logger
+https://jpx.gitbook.io/j-quants-ja/api-reference/daily_quotes
+"""
 
-from .abstract import IncrementalTableStream
+from __future__ import annotations
 
-LOGGER = get_logger()
-
-# 株価四本値(/prices/daily_quotes)
-# https://jpx.gitbook.io/j-quants-ja/api-reference/daily_quotes
+from tap_jquants.client import SCHEMAS_DIR, JQuantsDateStream
 
 
-class DailyQuotes(IncrementalTableStream):
-    """the daily_quotes stream"""
+class DailyQuotesStream(JQuantsDateStream):
+    """the daily_quotes stream."""
 
-    tap_stream_id = "daily_quotes"
-    path = "prices/daily_quotes"
-    key_properties = [
-        "date",
-        "code",
-    ]
-    valid_replication_keys = ["date"]
-    date_window_size = 1
-    skip_non_business_day = True
-
-    data_key = "daily_quotes"
-
-    def make_params(self, start_date: str, end_date: str, stream_metadata: Dict) -> Dict:
-        """Creates params for daily_quotes."""
-        code = self.config.get("code")
-        if code:
-            return {
-                "code": code,
-                "from": start_date,
-            }
-        return {
-            "date": start_date,
-        }
+    name = "daily_quotes"
+    path = "/prices/daily_quotes"
+    primary_keys = ["date", "code"]
+    replication_key = "date"
+    is_sorted = True
+    schema_filepath = SCHEMAS_DIR / "daily_quotes.json"
+    records_jsonpath = "$.daily_quotes[*]"
