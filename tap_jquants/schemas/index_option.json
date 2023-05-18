@@ -54,8 +54,7 @@
       "type": ["null", "number"]
     },
     "contract_month": {
-      "type": ["null", "string"],
-      "format": "date-time"
+      "type": ["null", "string"]
     },
     "strike_price": {
       "type": ["null", "number"]
