@@ -13,7 +13,7 @@ class ShortSellingStream(JQuantsDateStream):
 
     name = "short_selling"
     path = "/markets/short_selling"
-    primary_keys = ["date", "sector33code"]
+    primary_keys = ["date", "sector33_code"]
     replication_key = "date"
     is_sorted = True
     schema_filepath = SCHEMAS_DIR / "short_selling.json"
