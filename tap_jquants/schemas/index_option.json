@@ -59,7 +59,7 @@
     "strike_price": {
       "type": ["null", "number"]
     },
-    "volume__only_auction": {
+    "volume_only_auction": {
       "type": ["null", "number"]
     },
     "emergency_margin_trigger_division": {
