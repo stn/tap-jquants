@@ -35,6 +35,12 @@
     },
     "market_code_name": {
       "type": ["null", "string"]
+    },
+    "margin_code": {
+      "type": ["null", "string"]
+    },
+    "margin_code_name": {
+      "type": ["null", "string"]
     }
   }
 }
