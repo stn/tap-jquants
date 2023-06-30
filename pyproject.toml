@@ -23,6 +23,12 @@ singer-sdk = { version="^0.27.0", extras = ["testing"] }
 [tool.poetry.extras]
 s3 = ["fs-s3fs"]
 
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:pkg_resources is deprecated as an API:DeprecationWarning",
+    "ignore:Deprecated call to `pkg_resources.declare_namespace:DeprecationWarning",
+]
+
 [tool.mypy]
 python_version = "3.9"
 warn_unused_configs = true
