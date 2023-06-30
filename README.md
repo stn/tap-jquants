@@ -52,11 +52,11 @@ tap-jquants --about --format=markdown
 ```
 -->
 
-| Setting             | Required | Default | Description |
-|:--------------------|:--------:|:-------:|:------------|
-| mail_address        | True     | None    | The mail address to authenticate against the J-Quants API service |
-| password            | True     | None    | The password to authenticate against the J-Quants API service |
-| start_date          | False    | None    | The earliest record date to sync |
+| Setting      | Required | Default | Description                                                       |
+|:-------------|:--------:|:-------:|:------------------------------------------------------------------|
+| mail_address |   True   |  None   | The mail address to authenticate against the J-Quants API service |
+| password     |   True   |  None   | The password to authenticate against the J-Quants API service     |
+| start_date   |  False   |  None   | The earliest record date to sync                                  |
 
 A full list of supported settings and capabilities for this
 tap is available by running:
@@ -100,7 +100,7 @@ poetry install
 
 ### Create and Run Tests
 
-Create tests within the `tests` subfolder and
+Create tests within the `tests` sub-folder and
   then run:
 
 ```bash
@@ -145,3 +145,9 @@ meltano run tap-jquants target-jsonl
 
 See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to
 develop your own taps and targets.
+
+## References
+
+- [J-Quants API Reference](https://jpx.gitbook.io/j-quants-ja/)
+- [J-Quants API Reference (English)](https://jpx.gitbook.io/j-quants-en/)
+- [Meltanoとtap-jquantsを用いたELT](https://zenn.dev/akrisn/articles/meltano_jquants_setup)
