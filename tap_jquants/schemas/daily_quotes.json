@@ -20,6 +20,12 @@
     "close": {
       "type": ["null", "number"]
     },
+    "upper_limit": {
+      "type": ["null", "string"]
+    },
+    "lower_limit": {
+      "type": ["null", "string"]
+    },
     "volume": {
       "type": ["null", "number"]
     },
@@ -56,6 +62,12 @@
     "morning_close": {
       "type": ["null", "number"]
     },
+    "morning_upper_limit": {
+      "type": ["null", "string"]
+    },
+    "morning_lower_limit": {
+      "type": ["null", "string"]
+    },
     "morning_volume": {
       "type": ["null", "number"]
     },
@@ -88,6 +100,12 @@
     },
     "afternoon_close": {
       "type": ["null", "number"]
+    },
+    "afternoon_upper_limit": {
+      "type": ["null", "string"]
+    },
+    "afternoon_lower_limit": {
+      "type": ["null", "string"]
     },
     "afternoon_volume": {
       "type": ["null", "number"]
