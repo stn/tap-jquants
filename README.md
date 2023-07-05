@@ -1,5 +1,7 @@
 # tap-jquants
 
+![GitHub Action](https://github.com/stn/tap-jquants/actions/workflows/ci_workflow.yml/badge.svg)
+
 `tap-jquants` is a Singer tap for JQuants.
 
 Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
