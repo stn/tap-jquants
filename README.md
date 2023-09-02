@@ -11,6 +11,7 @@ Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
   - [daily_quotes](https://jpx.gitbook.io/j-quants-ja/api-reference/daily_quotes)
   - [announcement](https://jpx.gitbook.io/j-quants-ja/api-reference/announcement)
   - [dividend](https://jpx.gitbook.io/j-quants-ja/api-reference/dividend)
+  - [fs_details](https://jpx.gitbook.io/j-quants-ja/api-reference/statements-1)
   - [statements](https://jpx.gitbook.io/j-quants-ja/api-reference/statements)
   - [index_option](https://jpx.gitbook.io/j-quants-ja/api-reference/index_option)
   - [topix](https://jpx.gitbook.io/j-quants-ja/api-reference/topix)
