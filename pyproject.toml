@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tap-jquants"
-version = "0.5.0"
+version = "0.5.1"
 description = "`tap-jquants` is a Singer tap for JQuants, built with the Meltano Singer SDK."
 readme = "README.md"
 authors = ["Akira Ishino"]

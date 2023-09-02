@@ -1,6 +1,5 @@
 {
   "type": "object",
-  "additionalProperties": true,
   "properties": {
     "disclosed_date": {
       "type": "string",
@@ -19,7 +18,8 @@
       "type": ["null", "string"]
     },
     "financial_statement": {
-      "type": ["null", "string"]
+      "type": ["null", "object"]
     }
-  }
+  },
+  "additionalProperties": false
 }

@@ -50,6 +50,7 @@ class TapJQuants(Tap):
             streams.BreakdownStream(self),
             streams.DailyQuotesStream(self),
             streams.DividendStream(self),
+            streams.FsDetailsStream(self),
             streams.IndexOptionStream(self),
             streams.TopixStream(self),
             streams.ListedInfoStream(self),
