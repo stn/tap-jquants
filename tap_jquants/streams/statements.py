@@ -13,7 +13,7 @@ class StatementsStream(JQuantsDateStream):
 
     name = "statements"
     path = "/fins/statements"
-    primary_keys = ["disclosed_date", "local_code"]
+    primary_keys = ["disclosed_date", "local_code", "disclosure_number"]
     replication_key = "disclosed_date"
     is_sorted = True
     schema_filepath = SCHEMAS_DIR / "statements.json"
