@@ -3,29 +3,36 @@ ci:
   autoupdate_schedule: weekly
   autoupdate_commit_msg: 'chore: pre-commit autoupdate'
 
+
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.4.0
+  rev: v5.0.0
   hooks:
   - id: check-json
+    exclude: |
+      (?x)^(
+        \.vscode/.*\.json
+      )$
   - id: check-toml
   - id: check-yaml
   - id: end-of-file-fixer
   - id: trailing-whitespace
 
-- repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.0.277
+- repo: https://github.com/python-jsonschema/check-jsonschema
+  rev: 0.30.0
+  hooks:
+  - id: check-dependabot
+  - id: check-github-workflows
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.8.3
   hooks:
   - id: ruff
-    args: [--fix, --exit-non-zero-on-fix]
-
-- repo: https://github.com/psf/black
-  rev: 23.3.0
-  hooks:
-  - id: black
+    args: [--fix, --exit-non-zero-on-fix, --show-fixes]
+  - id: ruff-format
 
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v1.4.1
+  rev: v1.13.0
   hooks:
   - id: mypy
     additional_dependencies:

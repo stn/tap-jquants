@@ -2,15 +2,10 @@
 
 from __future__ import annotations
 
-import typing as t
-
 from singer_sdk import Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
 
-from . import streams
-
-if t.TYPE_CHECKING:
-    from .client import JQuantsStream
+from tap_jquants import streams
 
 
 class TapJQuants(Tap):
@@ -39,7 +34,7 @@ class TapJQuants(Tap):
         ),
     ).to_dict()
 
-    def discover_streams(self) -> list[JQuantsStream]:
+    def discover_streams(self) -> list[streams.JQuantsStream]:
         """Return a list of discovered streams.
 
         Returns:
