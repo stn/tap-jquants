@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "code": {
+      "type": "string"
+    },
+    "open": {
+      "type": ["null", "number"]
+    },
+    "high": {
+      "type": ["null", "number"]
+    },
+    "low": {
+      "type": ["null", "number"]
+    },
+    "close": {
+      "type": ["null", "number"]
+    }
+  },
+  "additionalProperties": false
+}

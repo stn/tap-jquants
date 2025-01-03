@@ -47,6 +47,7 @@ class TapJQuants(Tap):
             streams.DividendStream(self),
             streams.FsDetailsStream(self),
             streams.IndexOptionStream(self),
+            streams.IndicesStream(self),
             streams.TopixStream(self),
             streams.ListedInfoStream(self),
             streams.PricesAmStream(self),
