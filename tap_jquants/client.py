@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any, Callable, Iterable
 
 import requests
+from singer_sdk import metrics
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
 
@@ -92,6 +93,50 @@ class JQuantsStream(RESTStream):
             self.records_jsonpath,
             input=convert_json(response.json()),
         )
+    
+    # does not compatible with https://github.com/meltano/sdk/pull/1918 in singer-sdk 0.35.0
+    def request_records(self, context: Context | None) -> t.Iterable[dict]:
+        """Request records from REST endpoint(s), returning response records.
+
+        If pagination is detected, pages will be recursed automatically.
+
+        Args:
+            context: Stream partition or context dictionary.
+
+        Yields:
+            An item for every record in the response.
+        """
+        paginator = self.get_new_paginator()
+        decorated_request = self.request_decorator(self._request)
+        # pages = 0
+
+        with metrics.http_request_counter(self.name, self.path) as request_counter:
+            request_counter.context = context
+
+            while not paginator.finished:
+                prepared_request = self.prepare_request(
+                    context,
+                    next_page_token=paginator.current_value,
+                )
+                resp = decorated_request(prepared_request, context)
+                request_counter.increment()
+                self.update_sync_costs(prepared_request, resp, context)
+                yield from self.parse_response(resp)
+                # records = iter(self.parse_response(resp))
+                # try:
+                #     first_record = next(records)
+                # except StopIteration:
+                #     self.logger.info(
+                #         "Pagination stopped after %d pages because no records were "
+                #         "found in the last response",
+                #         pages,
+                #     )
+                #     break
+                # yield first_record
+                # yield from records
+                # pages += 1
+
+                paginator.advance(resp)
 
 
 class JQuantsDateStream(JQuantsStream):
