@@ -219,6 +219,9 @@
     "material_changes_in_subsidiaries": {
       "type": ["null", "string"]
     },
+    "significant_changes_in_the_scope_of_consolidation": {
+      "type": ["null", "string"]
+    },
     "changes_based_on_revisions_of_accounting_standard": {
       "type": ["null", "string"]
     },
