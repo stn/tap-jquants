@@ -30,4 +30,22 @@ class IndexOptionStream(JQuantsDateStream):
             row["night_session_high"] = None
             row["night_session_low"] = None
             row["night_session_close"] = None
+        if not row["volume_only_auction"]:
+            row["volume_only_auction"] = None
+        if not row["last_trading_day"]:
+            row["last_trading_day"] = None
+        if not row["special_quotation_day"]:
+            row["special_quotation_day"] = None
+        if not row["settlement_price"]:
+            row["settlement_price"] = None
+        if not row["theoretical_price"]:
+            row["theoretical_price"] = None
+        if not row["base_volatility"]:
+            row["base_volatility"] = None
+        if not row["underlying_price"]:
+            row["underlying_price"] = None
+        if not row["implied_volatility"]:
+            row["implied_volatility"] = None
+        if not row["interest_rate"]:
+            row["interest_rate"] = None
         return row
