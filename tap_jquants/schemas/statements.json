@@ -225,7 +225,7 @@
     "changes_based_on_revisions_of_accounting_standard": {
       "type": ["null", "string"]
     },
-    "changes_other_than_ones_based_on_revisions_of_accounting_standa": {
+    "changes_other_than_ones_based_on_revisions_of_accounting_standard": {
       "type": ["null", "string"]
     },
     "changes_in_accounting_estimates": {
@@ -234,7 +234,7 @@
     "retrospective_restatement": {
       "type": ["null", "string"]
     },
-    "number_of_issued_and_outstanding_shares_at_the_end_of_fiscal_ye": {
+    "number_of_issued_and_outstanding_shares_at_the_end_of_fiscal_year_including_treasury_stock": {
       "type": ["null", "string"]
     },
     "number_of_treasury_stock_at_the_end_of_fiscal_year": {
@@ -297,7 +297,7 @@
     "next_year_forecast_non_consolidated_profit2nd_quarter": {
       "type": ["null", "string"]
     },
-    "next_year_forecast_non_consolidated_earnings_per_share2nd_quart": {
+    "next_year_forecast_non_consolidated_earnings_per_share2nd_quarter": {
       "type": ["null", "string"]
     },
     "forecast_non_consolidated_net_sales": {
