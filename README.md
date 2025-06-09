@@ -19,6 +19,7 @@ Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
   - [breakdown](https://jpx.gitbook.io/j-quants-ja/api-reference/breakdown)
   - [prices_am](https://jpx.gitbook.io/j-quants-ja/api-reference/prices_am)
   - [short_selling](https://jpx.gitbook.io/j-quants-ja/api-reference/short_selling)
+  - [short_selling_positions](https://jpx.gitbook.io/j-quants-ja/api-reference/short_selling_positions)
   - [trades_spec](https://jpx.gitbook.io/j-quants-ja/api-reference/trades_spec)
   - [weekly_margin_interest](https://jpx.gitbook.io/j-quants-ja/api-reference/weekly_margin_interest)
   - [trading_calendar](https://jpx.gitbook.io/j-quants-ja/api-reference/trading_calendar)

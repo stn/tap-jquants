@@ -52,6 +52,7 @@ class TapJQuants(Tap):
             streams.ListedInfoStream(self),
             streams.PricesAmStream(self),
             streams.ShortSellingStream(self),
+            streams.ShortSellingPositionsStream(self),
             streams.StatementsStream(self),
             streams.TradesSpecStream(self),
             streams.TradingCalendarStream(self),

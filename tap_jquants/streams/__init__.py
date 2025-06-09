@@ -10,6 +10,7 @@ from tap_jquants.streams.indices import IndicesStream
 from tap_jquants.streams.listed_info import ListedInfoStream
 from tap_jquants.streams.prices_am import PricesAmStream
 from tap_jquants.streams.short_selling import ShortSellingStream
+from tap_jquants.streams.short_selling_positions import ShortSellingPositionsStream
 from tap_jquants.streams.statements import StatementsStream
 from tap_jquants.streams.topix import TopixStream
 from tap_jquants.streams.trades_spec import TradesSpecStream
@@ -28,6 +29,7 @@ __all__ = [
     "ListedInfoStream",
     "PricesAmStream",
     "ShortSellingStream",
+    "ShortSellingPositionsStream",
     "StatementsStream",
     "TradesSpecStream",
     "TradingCalendarStream",
