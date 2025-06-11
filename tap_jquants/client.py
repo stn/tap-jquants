@@ -166,6 +166,33 @@ class JQuantsDateStream(JQuantsStream):
         return params
 
 
+class JQuantsDisclosedDateStream(JQuantsStream):
+    """JQuants incremental stream class based on calculated_date."""
+
+    def get_new_paginator(self) -> BaseAPIPaginator:
+        """Return a new paginator object."""
+        return JQuantsDatePaginator()
+
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
+        """Return a dictionary of parameters to use in the URL."""
+        params: dict = {}
+        if next_page_token is not None:
+            date_key, pagination_key = next_page_token
+            if pagination_key:
+                params["pagination_key"] = next_page_token
+            params["disclosed_date"] = date_key
+        else:
+            starting_date = self.get_starting_timestamp(context)
+            if starting_date:
+                params["disclosed_date"] = starting_date.strftime("%Y-%m-%d")
+        self.logger.info("URL params: %s", params)
+        return params
+
+
 class JQuantsFromStream(JQuantsStream):
     """JQuants incremental stream class based on from."""
 

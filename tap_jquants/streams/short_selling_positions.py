@@ -5,10 +5,10 @@ https://jpx.gitbook.io/j-quants-ja/api-reference/short_selling_positions
 
 from __future__ import annotations
 
-from tap_jquants.client import SCHEMAS_DIR, JQuantsFromStream
+from tap_jquants.client import SCHEMAS_DIR, JQuantsDisclosedDateStream
 
 
-class ShortSellingPositionsStream(JQuantsFromStream):
+class ShortSellingPositionsStream(JQuantsDisclosedDateStream):
     """the short_selling_positions stream."""
 
     name = "short_selling_positions"
