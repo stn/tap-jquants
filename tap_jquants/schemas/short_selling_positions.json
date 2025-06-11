@@ -37,8 +37,7 @@
       "type": ["null", "number"]
     },
     "calculation_in_previous_reporting_date": {
-      "type": ["null", "string"],
-      "format": "date-time"
+      "type": ["null", "string"]
     },
     "short_positions_in_previous_reporting_ratio": {
       "type": ["null", "number"]
