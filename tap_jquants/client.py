@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-import sys
 import typing as t
+from functools import cached_property
 from pathlib import Path
 from typing import Any, Callable, Iterable
 
@@ -14,11 +14,6 @@ from singer_sdk.streams import RESTStream
 
 from tap_jquants.auth import JQuantsAuthenticator
 from tap_jquants.pagination import JQuantsDatePaginator
-
-if sys.version_info >= (3, 8):
-    from functools import cached_property
-else:
-    from cached_property import cached_property
 
 from .helpers import convert_json
 
@@ -95,7 +90,7 @@ class JQuantsStream(RESTStream):
         )
     
     # does not compatible with https://github.com/meltano/sdk/pull/1918 in singer-sdk 0.35.0
-    def request_records(self, context: Context | None) -> t.Iterable[dict]:
+    def request_records(self, context: dict | None) -> t.Iterable[dict]:
         """Request records from REST endpoint(s), returning response records.
 
         If pagination is detected, pages will be recursed automatically.
@@ -156,7 +151,7 @@ class JQuantsDateStream(JQuantsStream):
         if next_page_token is not None:
             date_key, pagination_key = next_page_token
             if pagination_key:
-                params["pagination_key"] = next_page_token
+                params["pagination_key"] = pagination_key
             params["date"] = date_key
         else:
             starting_date = self.get_starting_timestamp(context)
@@ -183,7 +178,7 @@ class JQuantsDisclosedDateStream(JQuantsStream):
         if next_page_token is not None:
             date_key, pagination_key = next_page_token
             if pagination_key:
-                params["pagination_key"] = next_page_token
+                params["pagination_key"] = pagination_key
             params["disclosed_date"] = date_key
         else:
             starting_date = self.get_starting_timestamp(context)
