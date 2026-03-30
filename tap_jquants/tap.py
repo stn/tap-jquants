@@ -43,6 +43,7 @@ class TapJQuants(Tap):
         return [
             streams.AnnouncementStream(self),
             streams.BreakdownStream(self),
+            streams.DailyMarginInterestStream(self),
             streams.DailyQuotesStream(self),
             streams.DividendStream(self),
             streams.FsDetailsStream(self),

@@ -2,6 +2,7 @@
 
 from tap_jquants.streams.announcement import AnnouncementStream
 from tap_jquants.streams.breakdown import BreakdownStream
+from tap_jquants.streams.daily_margin_interest import DailyMarginInterestStream
 from tap_jquants.streams.daily_quotes import DailyQuotesStream
 from tap_jquants.streams.dividend import DividendStream
 from tap_jquants.streams.fs_details import FsDetailsStream
@@ -20,6 +21,7 @@ from tap_jquants.streams.weekly_margin_interest import WeeklyMarginInterestStrea
 __all__ = [
     "AnnouncementStream",
     "BreakdownStream",
+    "DailyMarginInterestStream",
     "DailyQuotesStream",
     "DividendStream",
     "FsDetailsStream",

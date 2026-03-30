@@ -1,0 +1,87 @@
+{
+  "type": "object",
+  "properties": {
+    "published_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "code": {
+      "type": "string"
+    },
+    "application_date": {
+      "type": ["null", "string"]
+    },
+    "publish_reason": {
+      "type": ["null", "object"],
+      "properties": {
+        "restricted": {
+          "type": ["null", "boolean"]
+        },
+        "daily_publication": {
+          "type": ["null", "boolean"]
+        },
+        "monitoring": {
+          "type": ["null", "boolean"]
+        },
+        "restricted_by_jsf": {
+          "type": ["null", "boolean"]
+        },
+        "precaution_by_jsf": {
+          "type": ["null", "boolean"]
+        },
+        "unclear_or_sec_on_alert": {
+          "type": ["null", "boolean"]
+        }
+      }
+    },
+    "short_margin_outstanding": {
+      "type": ["null", "number"]
+    },
+    "daily_change_short_margin_outstanding": {
+      "type": ["null", "string"]
+    },
+    "short_margin_outstanding_listed_share_ratio": {
+      "type": ["null", "string"]
+    },
+    "long_margin_outstanding": {
+      "type": ["null", "number"]
+    },
+    "daily_change_long_margin_outstanding": {
+      "type": ["null", "string"]
+    },
+    "long_margin_outstanding_listed_share_ratio": {
+      "type": ["null", "string"]
+    },
+    "short_long_ratio": {
+      "type": ["null", "number"]
+    },
+    "short_negotiable_margin_outstanding": {
+      "type": ["null", "number"]
+    },
+    "daily_change_short_negotiable_margin_outstanding": {
+      "type": ["null", "string"]
+    },
+    "short_standardized_margin_outstanding": {
+      "type": ["null", "number"]
+    },
+    "daily_change_short_standardized_margin_outstanding": {
+      "type": ["null", "string"]
+    },
+    "long_negotiable_margin_outstanding": {
+      "type": ["null", "number"]
+    },
+    "daily_change_long_negotiable_margin_outstanding": {
+      "type": ["null", "string"]
+    },
+    "long_standardized_margin_outstanding": {
+      "type": ["null", "number"]
+    },
+    "daily_change_long_standardized_margin_outstanding": {
+      "type": ["null", "string"]
+    },
+    "tse_margin_borrowing_and_lending_regulation_classification": {
+      "type": ["null", "string"]
+    }
+  },
+  "additionalProperties": false
+}
